@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="个人博客搭建, Hexo">
+    <meta name="keywords" content="个人博客搭建&lt;基于Windows系统&gt;, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>个人博客搭建 | Hexo</title>
+    <title>个人博客搭建&lt;基于Windows系统&gt; | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">个人博客搭建</h1>
+                    <h1 class="description center-align post-title">个人博客搭建&lt;基于Windows系统&gt;</h1>
                 </div>
             </div>
         </div>
@@ -458,11 +458,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>内容</p>
+                <h2 id="第一步（软件的环境的安装）"><a href="#第一步（软件的环境的安装）" class="headerlink" title="第一步（软件的环境的安装）"></a>第一步（软件的环境的安装）</h2><p>– #安装Nodejs，安装提示下一步下一步就ok，<br>最好安装git，用起来少坑。<br>安装完成：<br>node -v #查看node版本<br>npm和node是一起安装的同理：<br>nmp -v #查看nmp版本<br>因为npm是基于国外的源，不建议用npm来下载安装软件<br>这时候我们可以用taobao的cnpm来代替，可以加快下载安装的速度<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>等待安装完成即可<br>cnpm -v #查看版本</p>
+<p>接下来安装开始hexo<br>cnpm install -g hexo-cli #全局安装hexo<br>等待完成即可<br>同样验证安装是否完成<br>hexo -v #查看版本</p>
 <hr>
-<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>内容</p>
+<h2 id="第二步（搭建本地博客）"><a href="#第二步（搭建本地博客）" class="headerlink" title="第二步（搭建本地博客）"></a>第二步（搭建本地博客）</h2><p>–#在文件夹中新建一个空文件夹（！！注意一定要是空的文件夹，要不然会出错，我的是blgo）<br>git直接<br>mkdir blgo #创建blgo文件夹<br>然后我们进入blgo目录下（cd .. #返回上一层    cd blgo/ #进入blgo目录下）实在你懒得打，直接在文件夹右键Git Bash Here即可</p>
+<p>然后我们初始化一个博客<br>hexo init #<br>等待出现提示 INFO Start blogging with Hexo！即可<br>然后blgo文件夹下面会生成一些文件，基本上就是博客的所有东西</p>
+<p>接下来我们启动博客<br>hexo s  #s是start的缩写<br>浏览器输入 localhost：4000<br>本地离线博客已经成功搭建完成</p>
+<p>它默认创建一个hello word 的博客，我们自己创建一个自己的博客<br>同样在blgo目录下<br>hexo n ”我的第一篇博客“ #创建一个博客 n = new<br>在source目录下有了”我的第一篇博客.md“ 创建完成</p>
+<p>然后进入博客写内容<br>vim 我的第一篇博客.md #编辑博客内容</p>
+<p>再回到blgo<br>hexo g #生成修改的内容 g = generate（生成）<br>hexo s  #启动博客 s = start（开始）<br>同上查看新建的博客<br>完成本地搭建</p>
 <hr>
-<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2>
+<h2 id="第三步（把博客部署到github上公开使用）"><a href="#第三步（把博客部署到github上公开使用）" class="headerlink" title="第三步（把博客部署到github上公开使用）"></a>第三步（把博客部署到github上公开使用）</h2><p>–#打开igithub.com<br>创建自己的账号，再新建一个仓库。<br>仓库命名：自己的昵称+ github.io</p>
+<p>安装部署的插件<br>cnpm install –save hexo-deployer-git #</p>
+<p>打开_config.yml文件<br>vim _config.yml #可以tabel补全文件名</p>
+<p>在# Deployment 下的 type: 加上git（每个冒号后面注意加空格）<br>然后再type下面加上<br>repo： 自己的仓库地址<br>branch： master<br>esc :wq #保存退出 i是编辑模式</p>
+<p>hexo d # hexo 部署到github  d = dispose（部署）<br>中途需要输入账号和密码</p>
+<p>完成后，直接浏览器输入 <a href="https://zhuzhulovekobe.github.or" target="_blank" rel="noopener">https://zhuzhulovekobe.github.or</a> (git网站不是很稳定，多刷新几次即可）<br>这时候我们就算是完成了云端的部署</p>
+<h2 id="第四步（美化自己的博客主题"><a href="#第四步（美化自己的博客主题" class="headerlink" title="第四步（美化自己的博客主题)"></a>第四步（美化自己的博客主题)</h2><p>–#找到自己想要的hexo主题链接（baidu很多）<br>进入blgo<br>git clone 链接.git themes/主题的名字 #下载主题到tmemes目录下</p>
+<p>下载完成之后我们要到 _config.yml 里面修改为 theme：主题名字<br>然后保存返回</p>
+<p>重新<br>hexo g<br>hexo s<br>hexo d</p>
+<p>多刷新几次完成即可</p>
+<p>##感谢翻看</p>
+
             </div>
             <hr/>
 
