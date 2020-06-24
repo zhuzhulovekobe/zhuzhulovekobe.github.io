@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="博客搭建, Hexo">
+    <meta name="keywords" content="ip地址详解, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>博客搭建 | Hexo</title>
+    <title>ip地址详解 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">博客搭建</h1>
+                    <h1 class="description center-align post-title">ip地址详解</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-05-23
+                    2020-06-24
                 </div>
                 
 
@@ -458,7 +458,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第一步图片如下"><a href="#第一步图片如下" class="headerlink" title="第一步图片如下"></a>第一步图片如下</h2><p><img src="/.com//1.jpg" alt="1"></p>
+                <h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>ip规则：主机位不全为0或者不全为255可以用<br>ip：100.0.0.255 可以用<br>掩码：255.0.0.0 后面3位都是主机位</p>
+<p>– #   A类：1-126      掩码：255.0.0.0<br>         B类：128-191  掩码：255.255.0.0<br>         C类：192-223  掩码：255.255.255.0<br> ip：127.0.0.1 回环地址<br>GW=网关（于路由器上，内网出口，由于与外网连接）<br>DNS=域名解析服务器</p>
+<p>IP：22.3.5.8<br>掩码：255.255.255.0</p>
+<p>网段：22.3.5.0  （主机位置0)<br>地址范围：22.3.5.1 - 22.3.5.254<br>广播地址：22.3.5.255</p>
+<p>– #通信步骤：<br>先比较是否同一网段（查看掩码再查看ip前三位）<br>同一网段直接发送到目标<br>不同发送包到网关</p>
+<p>ping -t ip  ：一直ping<br>ping -n 数字 ip：修改ping包的数量<br>ping -l 数字 ip：修改ping包大小</p>
+<p>手工解析域名：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> </p>
+<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>– #数制类型</p>
+<p>0-9和A-F（11.12.13.14.15.16）</p>
+<p>十进制转十进制：<br>         8       8       8<br>位权  100   10     1      （位权就是1<em>进制的位数，1，1<em>10，1</em>10</em> 以此类推）<br>每一位<em>位权相加：8</em>100+8<em>10+8</em>1</p>
+<p>二进制转十进制简单方法：<br>          1     1      1   1<br>位权    8    4      2    1<br>1+2+4+8=15</p>
+<p>其他进制也一样：16装10<br>2     6<br>16   1<br>1<em>6+2</em>16=38</p>
 
             </div>
             <hr/>
@@ -484,7 +495,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/05/23/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">http://yoursite.com/2020/05/23/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</a>
+                    <a href="http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/">http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -692,25 +703,25 @@
                 <i class="far fa-dot-circle"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/2020/05/23/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+                <a href="/2020/06/24/ip%E5%9C%B0%E5%9D%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="博客搭建">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ip地址详解">
                         
-                        <span class="card-title">博客搭建</span>
+                        <span class="card-title">ip地址详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一步图片如下
-
+                            IPip规则：主机位不全为0或者不全为255可以用ip：100.0.0.255 可以用掩码：255.0.0.0 后面3位都是主机位
+– #   A类：1-126      掩码：255.0.0.0         B类：128-191  掩
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-24
                             </span>
                         <span class="publish-author">
                             
