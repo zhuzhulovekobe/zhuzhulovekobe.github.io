@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ip地址详解, Hexo">
+    <meta name="keywords" content="用户管理与系统密码破解, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ip地址详解 | Hexo</title>
+    <title>用户管理与系统密码破解 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ip地址详解</h1>
+                    <h1 class="description center-align post-title">用户管理与系统密码破解</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-24
+                    2020-06-25
                 </div>
                 
 
@@ -458,20 +458,21 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>ip规则：主机位不全为0或者不全为255可以用<br>ip：100.0.0.255 可以用<br>掩码：255.0.0.0 后面3位都是主机位</p>
-<p>– #   A类：1-126      掩码：255.0.0.0<br>         B类：128-191  掩码：255.255.0.0<br>         C类：192-223  掩码：255.255.255.0<br> ip：127.0.0.1 回环地址<br>GW=网关（于路由器上，内网出口，由于与外网连接）<br>DNS=域名解析服务器</p>
-<p>IP：22.3.5.8<br>掩码：255.255.255.0</p>
-<p>网段：22.3.5.0  （主机位置0)<br>地址范围：22.3.5.1 - 22.3.5.254<br>广播地址：22.3.5.255</p>
-<p>– #通信步骤：<br>先比较是否同一网段（查看掩码再查看ip前三位）<br>同一网段直接发送到目标<br>不同发送包到网关</p>
-<p>ping -t ip  ：一直ping<br>ping -n 数字 ip：修改ping包的数量<br>ping -l 数字 ip：修改ping包大小</p>
-<p>手工解析域名：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> </p>
-<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>– #数制类型</p>
-<p>0-9和A-F（11.12.13.14.15.16）</p>
-<p>十进制转十进制：<br>         8       8       8<br>位权  100   10     1      （位权就是1<em>进制的位数，1，1<em>10，1</em>10</em> 以此类推）<br>每一位<em>位权相加：8</em>100+8<em>10+8</em>1</p>
-<p>二进制转十进制简单方法：<br>          1     1      1   1<br>位权    8    4      2    1<br>1+2+4+8=15</p>
-<p>其他进制也一样：16装10<br>2     6<br>16   1<br>1<em>6+2</em>16=38</p>
-<p>十进制转二进制：<br>160</p>
-<p>128 64 32 16 8 4 2 1<br>1      0   1   0   0 0 0 0<br>128+32=160</p>
+                <h2 id><a href="#" class="headerlink" title></a></h2><p>SID（安全标识符）<br>widows系统管理员administrator的UID是500，加administrator的UID是501开始<br>其他普通用户的UID是1000开始</p>
+<p>##<br>内置账号<br>用户密码存储位置：C:\windows\system32/config\SAM    #暴力破解<br>默认密码最长有效期42天</p>
+<p>guest          #来宾账号</p>
+<p>计算机服务组件相关的系统账号：<br>system                   #系统账号==权限最高<br>local services          #本地服务账号==权限普通<br>network services    #网络服务账号=权限普通</p>
+<p>##<br>命令行：mstsc              #开启远程桌面管理</p>
+<p>netstat -an   #查看所有开放的端口<br>服务        端口号<br>telent：  23<br>远程桌面协议RDP（Remote Deskttop Protocal）：3389</p>
+<p>ntsd -c q -pn winlogon.exe          #针对xp或者win2003的蓝屏命令</p>
+<p>##<br>破解系统密码</p>
+<p>win7两个漏洞可以破解</p>
+<p>1、未登录系统时按5次shitf键，出现沾滞键（sethc.exe)<br>2、重启win7，正在windows图标正在启动时，关机，然后再开机会出现错误恢复<br>3、出现“启动修复”，选择，出现系统还原提示，点击取消<br>4、等待几分钟，会出现问题的原因，点击查看详细信息<br>5、打开最后一个链接，就是一个记事本<br>6、打开记事本之后选择“文件-打开”，打开“计算机-windows-System32”<br>7、文件类型处选择所有文件，点中任意一个文件，然后点s，每点一次就会遍历一个s开通的文件<br>8、找到sethc.exe，改为zhu.exe,然后再找cmd.exe，然后复制粘贴为副本，点击副本重命名为sethc.exe<br>9、开机重启，按五次shitf进入到cmd<br>10、cmd输入net user   #查看用户   再熟入met user 用户名 “”  #用户不设置密码<br>11、net user zhuzhu 密码 /add    ##创建一个zhuzhu和密码<br>       net localgroup administrators zhuzhu /add   ##把zhuzhu添加到管理员组</p>
+<p>net user 用户名 新密码</p>
+<p>##<br>PE破解系统密码</p>
+<p>一般开机硬盘引导，设置先进行u盘引导，而我u盘有一个PE操作系统，</p>
+<p>所以我能用u盘的pe系统对系统硬盘进行修改</p>
+<p>基于虚拟机的pe破解：<br>1、下载：U深度增强版  微PE好用<br>2、插上u盘一键制作<br>3、放入PE.ios（光盘）镜像文件<br>4、在设置点击：打开电源时进入固件，进入Boot，查看硬盘在前面（如果是u盘就把usb移动到前面），<br>鼠标到CD然后shift加+把CD移动到硬盘（hard drlve）前面，然后F10保存<br>5、进入PE系统界面，运行win PE 微型维修系统<br>6、点击破解密码，点打开SAM，选中用户点更改口令，不输入默认为空，保存退出。<br>7、关机再选择从硬盘启动</p>
 
             </div>
             <hr/>
@@ -497,7 +498,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/">http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/</a>
+                    <a href="http://yoursite.com/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">http://yoursite.com/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -700,9 +701,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
                     <div class="card-image">
@@ -721,9 +723,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -732,6 +734,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -742,24 +745,25 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/22/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+                <a href="/2020/06/24/ip%E5%9C%B0%E5%9D%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="个人博客搭建&lt;基于Windows系统&gt;">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ip地址详解">
                         
-                        <span class="card-title">个人博客搭建&lt;基于Windows系统&gt;</span>
+                        <span class="card-title">ip地址详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一步（软件的环境的安装）– #安装Nodejs，安装提示下一步下一步就ok，最好安装git，用起来少坑。安装完成：node -v #查看node版本npm和node是一起安装的同理：nmp -v #查看nmp版本因为npm是基于国外的源，
+                            IPip规则：主机位不全为0或者不全为255可以用ip：100.0.0.255 可以用掩码：255.0.0.0 后面3位都是主机位
+– #   A类：1-126      掩码：255.0.0.0         B类：128-191  掩
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-24
                             </span>
                         <span class="publish-author">
                             
