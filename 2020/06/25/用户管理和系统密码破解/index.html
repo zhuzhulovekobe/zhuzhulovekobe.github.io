@@ -458,18 +458,20 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id><a href="#" class="headerlink" title></a></h2><p>SID（安全标识符）<br>widows系统管理员administrator的UID是500，加administrator的UID是501开始<br>其他普通用户的UID是1000开始</p>
+                <hr>
+<h2 id><a href="#" class="headerlink" title></a></h2><p>SID（安全标识符）<br>widows系统管理员administrator的UID是500，加administrator的UID是501开始<br>其他普通用户的UID是1000开始</p>
 <p>##<br>内置账号<br>用户密码存储位置：C:\windows\system32/config\SAM    #暴力破解<br>默认密码最长有效期42天</p>
 <p>guest          #来宾账号</p>
 <p>计算机服务组件相关的系统账号：<br>system                   #系统账号==权限最高<br>local services          #本地服务账号==权限普通<br>network services    #网络服务账号=权限普通</p>
+<hr>
 <p>##<br>命令行：mstsc              #开启远程桌面管理</p>
 <p>netstat -an   #查看所有开放的端口<br>服务        端口号<br>telent：  23<br>远程桌面协议RDP（Remote Deskttop Protocal）：3389</p>
 <p>ntsd -c q -pn winlogon.exe          #针对xp或者win2003的蓝屏命令</p>
+<hr>
 <p>##<br>破解系统密码</p>
 <p>win7两个漏洞可以破解</p>
 <p>1、未登录系统时按5次shitf键，出现沾滞键（sethc.exe)<br>2、重启win7，正在windows图标正在启动时，关机，然后再开机会出现错误恢复<br>3、出现“启动修复”，选择，出现系统还原提示，点击取消<br>4、等待几分钟，会出现问题的原因，点击查看详细信息<br>5、打开最后一个链接，就是一个记事本<br>6、打开记事本之后选择“文件-打开”，打开“计算机-windows-System32”<br>7、文件类型处选择所有文件，点中任意一个文件，然后点s，每点一次就会遍历一个s开通的文件<br>8、找到sethc.exe，改为zhu.exe,然后再找cmd.exe，然后复制粘贴为副本，点击副本重命名为sethc.exe<br>9、开机重启，按五次shitf进入到cmd<br>10、cmd输入net user   #查看用户   再熟入met user 用户名 “”  #用户不设置密码<br>11、net user zhuzhu 密码 /add    ##创建一个zhuzhu和密码<br>       net localgroup administrators zhuzhu /add   ##把zhuzhu添加到管理员组</p>
-<p>net user 用户名 新密码</p>
-<p>##<br>PE破解系统密码</p>
+<h2 id="net-user-用户名-新密码"><a href="#net-user-用户名-新密码" class="headerlink" title="net user 用户名 新密码"></a>net user 用户名 新密码</h2><p>##<br>PE破解系统密码</p>
 <p>一般开机硬盘引导，设置先进行u盘引导，而我u盘有一个PE操作系统，</p>
 <p>所以我能用u盘的pe系统对系统硬盘进行修改</p>
 <p>基于虚拟机的pe破解：<br>1、下载：U深度增强版  微PE好用<br>2、插上u盘一键制作<br>3、放入PE.ios（光盘）镜像文件<br>4、在设置点击：打开电源时进入固件，进入Boot，查看硬盘在前面（如果是u盘就把usb移动到前面），<br>鼠标到CD然后shift加+把CD移动到硬盘（hard drlve）前面，然后F10保存<br>5、进入PE系统界面，运行win PE 微型维修系统<br>6、点击破解密码，点打开SAM，选中用户点更改口令，不输入默认为空，保存退出。<br>7、关机再选择从硬盘启动</p>
@@ -701,31 +703,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+                <a href="/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="用户管理与系统密码破解">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NFTS权限和cifs服务器">
                         
-                        <span class="card-title">用户管理与系统密码破解</span>
+                        <span class="card-title">NFTS权限和cifs服务器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SID（安全标识符）widows系统管理员administrator的UID是500，加administrator的UID是501开始其他普通用户的UID是1000开始
-##内置账号用户密码存储位置：C:\windows\system32/
+                            一、文件系统：存储文件格式格式化==制作文件系统ACL==访问控制列表只有NTFS才能设置权限
+– #例：先创建两个用户，a、b两个用户同属于users组文件属性打开-安全权限：修改（包含读取、运行、写入、删除）不包括对权限的修改特殊权限：
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -734,7 +735,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

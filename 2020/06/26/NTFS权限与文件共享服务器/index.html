@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ip地址详解, Hexo">
+    <meta name="keywords" content="NFTS权限和cifs服务器, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ip地址详解 | Hexo</title>
+    <title>NFTS权限和cifs服务器 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ip地址详解</h1>
+                    <h1 class="description center-align post-title">NFTS权限和cifs服务器</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-24
+                    2020-06-26
                 </div>
                 
 
@@ -458,22 +458,19 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>ip规则：主机位不全为0或者不全为255可以用<br>ip：100.0.0.255 可以用<br>掩码：255.0.0.0 后面3位都是主机位</p>
-<p>– #   A类：1-126      掩码：255.0.0.0<br>         B类：128-191  掩码：255.255.0.0<br>         C类：192-223  掩码：255.255.255.0<br> ip：127.0.0.1 回环地址<br>GW=网关（于路由器上，内网出口，由于与外网连接）<br>DNS=域名解析服务器</p>
-<p>IP：22.3.5.8<br>掩码：255.255.255.0</p>
-<p>网段：22.3.5.0  （主机位置0)<br>地址范围：22.3.5.1 - 22.3.5.254<br>广播地址：22.3.5.255</p>
+                <h2 id><a href="#" class="headerlink" title></a></h2><p>一、文件系统：存储文件格式<br>格式化==制作文件系统<br>ACL==访问控制列表<br>只有NTFS才能设置权限</p>
+<p>– #<br>例：<br>先创建两个用户，a、b两个用户同属于users组<br>文件属性打开-安全<br>权限：修改（包含读取、运行、写入、删除）不包括对权限的修改<br>特殊权限：针对权限表<br>net user a 1 /add<br>net user b 1 /add</p>
+<p>安全-添加-高级-立即查找  #可以列出所有系统用户，然后添加</p>
+<p>权限累加–当用户同时属于多个用户时，权限是类加的</p>
 <hr>
-<p>– #通信步骤：<br>先比较是否同一网段（查看掩码再查看ip前三位）<br>同一网段直接发送到目标<br>不同发送包到网关</p>
-<p>ping -t ip  ：一直ping<br>ping -n 数字 ip：修改ping包的数量<br>ping -l 数字 ip：修改ping包大小</p>
-<p>手工解析域名：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> </p>
+<p>##<br>cifs服务管理</p>
+<p>1、找到要共享的文件夹，右键属性-共享<br>2、点击高级设置-”勾上共享此文件“，共享名（别人看到的文件的名字，不一定是自己文件的名字）<br>3、点击-权限，有一个内置组Everyone，只有读取的一个权限，<br>4、尝试把权限修改为：完全控制权限<br>5、然后在客户机cmd输入UNC地址：\192.168.1.132:客户机ip地址或者文件的共享名(\:网络共享的专属地址符号，一个\是本地路径，两个\即网络路径）<br>6、本机新建一个普通用户给客户机登录<br>7、远程共享和本地共享NTFS权限的共同影响，最终取其交集，所以设置高级共享权限为完全控制，然后具体的权限需求在NTFS设置<br>8、保证客户机能进入文件夹，然后再对文件里面的东西进行二次安全设置权限</p>
 <hr>
-<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>– #数制类型</p>
-<p>0-9和A-F（11.12.13.14.15.16）</p>
-<p>十进制转十进制：<br>         8       8       8<br>位权  100   10     1      （位权就是1<em>进制的位数，1，1<em>10，1</em>10</em> 以此类推）<br>每一位<em>位权相加：8</em>100+8<em>10+8</em>1</p>
-<p>二进制转十进制简单方法：<br>          1     1      1   1<br>位权    8    4      2    1<br>1+2+4+8=15</p>
-<p>其他进制也一样：16装10<br>2     6<br>16   1<br>1<em>6+2</em>16=38</p>
-<p>十进制转二进制：<br>160</p>
-<p>128 64 32 16 8 4 2 1<br>1      0   1   0   0 0 0 0<br>128+32=160</p>
+<p>##<br>whoami   #我的身份是<br>whoami /user   #用户的信息</p>
+<p>共享名：文件名$       #隐藏共享名<br>要想访问隐藏共享文件，输入:   \ip地址\文件名$</p>
+<p>net localgroup  #列出组列表<br>net share          #列出共享文件列表</p>
+<p>net share ged /del               #删除共享名为ged的文件<br>net share c$=c:\            #添加一个共享名为c的隐藏文件，他的物理路径在c:/<br>要想屏蔽系统隐藏共享的自动产生，可以通过服务管理禁用Server 445端口号，可以通过修改注册表信息来实现（百度知识点）</p>
+<p>注册表：相当于户籍科，记录程序的一些信息<br>打开注册表编辑器：regedit<br>打开服务管理窗口：services.mac</p>
 
             </div>
             <hr/>
@@ -499,7 +496,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/">http://yoursite.com/2020/06/24/ip%E5%9C%B0%E5%9D%80/</a>
+                    <a href="http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -702,9 +699,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NFTS权限和cifs服务器">
+                        
+                        <span class="card-title">NFTS权限和cifs服务器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、文件系统：存储文件格式格式化==制作文件系统ACL==访问控制列表只有NTFS才能设置权限
+– #例：先创建两个用户，a、b两个用户同属于users组文件属性打开-安全权限：修改（包含读取、运行、写入、删除）不包括对权限的修改特殊权限：
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
                     <div class="card-image">
@@ -724,45 +761,8 @@ SID（安全标识符）widows系统管理员administrator的UID是500，加admi
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/22/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="个人博客搭建&lt;基于Windows系统&gt;">
-                        
-                        <span class="card-title">个人博客搭建&lt;基于Windows系统&gt;</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            第一步（软件的环境的安装）– #安装Nodejs，安装提示下一步下一步就ok，最好安装git，用起来少坑。安装完成：node -v #查看node版本npm和node是一起安装的同理：nmp -v #查看nmp版本因为npm是基于国外的源，
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
                             </span>
                         <span class="publish-author">
                             
