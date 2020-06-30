@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="NFTS权限和cifs服务器, Hexo">
+    <meta name="keywords" content="DNS部署与安全, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>NFTS权限和cifs服务器 | Hexo</title>
+    <title>DNS部署与安全 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">NFTS权限和cifs服务器</h1>
+                    <h1 class="description center-align post-title">DNS部署与安全</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-06-28
                 </div>
                 
 
@@ -458,19 +458,25 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id><a href="#" class="headerlink" title></a></h2><p>一、文件系统：存储文件格式<br>格式化==制作文件系统<br>ACL==访问控制列表<br>只有NTFS才能设置权限</p>
-<p>– #<br>例：<br>先创建两个用户，a、b两个用户同属于users组<br>文件属性打开-安全<br>权限：修改（包含读取、运行、写入、删除）不包括对权限的修改<br>特殊权限：针对权限表<br>net user a 1 /add<br>net user b 1 /add</p>
-<p>安全-添加-高级-立即查找  #可以列出所有系统用户，然后添加</p>
-<p>权限累加–当用户同时属于多个用户时，权限是类加的</p>
+                <h2 id="DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53"><a href="#DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53" class="headerlink" title="DNS（Domain Name Service 域名服务）端口：TCP、UDP53"></a>DNS（Domain Name Service 域名服务）端口：TCP、UDP53</h2><p>– #域名组成<br>1、“<a href="http://www.sina.com.cn&quot;" target="_blank" rel="noopener">www.sina.com.cn&quot;</a> 是一个域名，www是主机名+域名</p>
+<p>一般网站的www，博客的是blog，论坛的是bbs，<br>nslookup <a href="http://www.xxx.com.cn" target="_blank" rel="noopener">www.xxx.com.cn</a>    #查看域名信息</p>
+<p>客户机发送百度请求，先在本地DNS服务器查找相应的缓存，如果有缓存就直接访问目标，如果无百度的缓存信息。<br>如果无 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>. 的信息先访问根域”.”,找到2.2.2.2（.com. 的域名服务器）<br>然后在3.3.3.3找到<a href="http://www.100.1.1.1的DNS服务器，成功访问并且保存缓存" target="_blank" rel="noopener">www.100.1.1.1的DNS服务器，成功访问并且保存缓存</a></p>
+<p>递归查询（本地DNS服务器与客户机之间，DNS转发器）：问啥答啥<br>迭代查询(DNS服务器与根之间）：问啥不答啥</p>
 <hr>
-<p>##<br>cifs服务管理</p>
-<p>1、找到要共享的文件夹，右键属性-共享<br>2、点击高级设置-”勾上共享此文件“，共享名（别人看到的文件的名字，不一定是自己文件的名字）<br>3、点击-权限，有一个内置组Everyone，只有读取的一个权限，<br>4、尝试把权限修改为：完全控制权限<br>5、然后在客户机cmd输入UNC地址：\192.168.1.132:客户机ip地址或者文件的共享名(\:网络共享的专属地址符号，一个\是本地路径，两个\即网络路径）<br>6、本机新建一个普通用户给客户机登录<br>7、远程共享和本地共享NTFS权限的共同影响，最终取其交集，所以设置高级共享权限为完全控制，然后具体的权限需求在NTFS设置<br>8、保证客户机能进入文件夹，然后再对文件里面的东西进行二次安全设置权限</p>
+<p>只要装好DNS服务就是一台真正的DNS服务器<br>baidu.com.dns  #区域dns文件</p>
+<p>SOA（启始授权机构）权威服务器<br>NS（域名服务器）</p>
+<p>##验证服务器方法<br>服务机：先打开DNS服务器选择正向查找区域然后新建区域，新建一个baidu.com.dns文件，<br>再右键新建主机，名称为www,设置ip地址</p>
+<p>设置客户机的DNS服务器地址</p>
+<p>方法一：<br>nslookup 域名<br>Server:  UnKnown<br>Address:  10.1.1.1        #通过DNS指向，目标虚拟机10.1.1.1</p>
+<p>DNS request timed out.<br>    timeout was 2 seconds.<br>Name:    <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>Address:  1.1.1.1        #10.1.1.1解析<a href="http://www.baidu.com为1.1.1.1" target="_blank" rel="noopener">www.baidu.com为1.1.1.1</a></p>
+<p>方法二：<br>ping zhu.baidu.com<br>Pinging zhu.baidu.com [2.2.2.2] with 32 bytes of data:</p>
+<p>ipconfig /flushdns    #刷新dns缓存<br>ipconfig /displaydns  #展示dns</p>
 <hr>
-<p>##<br>whoami   #我的身份是<br>whoami /user   #用户的信息</p>
-<p>共享名：文件名$       #隐藏共享名<br>要想访问隐藏共享文件，输入:   \ip地址\文件名$</p>
-<p>net localgroup  #列出组列表<br>net share          #列出共享文件列表</p>
-<p>net share ged /del               #删除共享名为ged的文件<br>net share c$=c:\            #添加一个共享名为c的隐藏文件，他的物理路径在c:/<br>要想屏蔽系统隐藏共享的自动产生，可以通过服务管理禁用Server 445端口号，可以通过修改注册表信息来实现（百度知识点）</p>
-<p>注册表：相当于户籍科，记录程序的一些信息<br>打开注册表编辑器：regedit<br>打开服务管理窗口：services.mac</p>
+<p>##服务器通过域名对内访问</p>
+<p>反向解析：<br>1、在反向查找区域新建一个区域，<br>2、在网络id输入网段 10.1.1<br>3、在方向文件里新建一个PTR，主机ip10.1.1.1（相当于有人问我10.1.1.1是谁，我的答案就是主机名）  主机名可以手动输入，可以查找：浏览-服务器-正向区域-选择区域-选择主机名</p>
+<p>辅助区域：<br>源服务器准备：右键我们要传送的区域-属性-区域传送-允许区域传送只允许到目标服务器（添加目标服务器ip）<br>目标服务器：<br>1、新建辅助区域<br>2、输入区域名称<br>3、输入要源头的ip地址添加，刷新即可</p>
+<p>转发器：<br>外网服务器：新建区域：jd.com  新建主机名称：www ip地址：7.7.7.7<br>客户机：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> 无法解析<br>公司服务器：右键win-wxf-属性-转发器-添加外网服务器的ip地址<br>客户机：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> 可以解析</p>
+<p>客户机请求域名-缓存-host文件-请求给服务器<br>服务器发送请求-再看缓存-自己负责的区域-根</p>
 
             </div>
             <hr/>
@@ -496,7 +502,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/</a>
+                    <a href="http://yoursite.com/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">http://yoursite.com/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -699,9 +705,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="DNS部署与安全">
+                        
+                        <span class="card-title">DNS部署与安全</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            DNS（Domain Name Service 域名服务）端口：TCP、UDP53– #域名组成1、“www.sina.com.cn&quot; 是一个域名，www是主机名+域名
+一般网站的www，博客的是blog，论坛的是bbs，nslo
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
                     <div class="card-image">
@@ -721,47 +767,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-27
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="用户管理与系统密码破解">
-                        
-                        <span class="card-title">用户管理与系统密码破解</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-SID（安全标识符）widows系统管理员administrator的UID是500，加administrator的UID是501开始其他普通用户的UID是1000开始
-##内置账号用户密码存储位置：C:\windows\system32
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-27
                             </span>
                         <span class="publish-author">
                             

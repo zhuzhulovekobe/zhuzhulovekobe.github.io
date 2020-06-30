@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="NFTS权限和cifs服务器, Hexo">
+    <meta name="keywords" content="DHCP部署与安全, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>NFTS权限和cifs服务器 | Hexo</title>
+    <title>DHCP部署与安全 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">NFTS权限和cifs服务器</h1>
+                    <h1 class="description center-align post-title">DHCP部署与安全</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-26
+                    2020-06-27
                 </div>
                 
 
@@ -458,19 +458,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id><a href="#" class="headerlink" title></a></h2><p>一、文件系统：存储文件格式<br>格式化==制作文件系统<br>ACL==访问控制列表<br>只有NTFS才能设置权限</p>
-<p>– #<br>例：<br>先创建两个用户，a、b两个用户同属于users组<br>文件属性打开-安全<br>权限：修改（包含读取、运行、写入、删除）不包括对权限的修改<br>特殊权限：针对权限表<br>net user a 1 /add<br>net user b 1 /add</p>
-<p>安全-添加-高级-立即查找  #可以列出所有系统用户，然后添加</p>
-<p>权限累加–当用户同时属于多个用户时，权限是类加的</p>
+                <hr>
+<p>##<br>DHCP作用：自动分配ip地址<br>地址池：(ip、子网掩码、网关、DNS、租期)</p>
+<p>##<br>DHCP原理（租赁过程）<br>四个步骤：<br>1、客户机发送DHCP Discovery广播包<br>      客户机广播请求ip地址（包含客户机的MAC地址“电脑的唯一标识”）</p>
+<p>2、服务器响应DHCP offer广播包<br>     服务器响应提供的ip地址（无子网掩码，网关等信息）</p>
+<p>3、客户机发送DHCP Request广播包  （意为选择了这个ip地址，然后请求这个ip的其他参数信息都给我）<br>     客户机选择ip</p>
+<p>4、发送DHCP ACK广播包 （ACK：确认）<br>      服务器确定了租约，并且提供网卡的子网掩码、网关、DNS、租期等信息。</p>
 <hr>
-<p>##<br>cifs服务管理</p>
-<p>1、找到要共享的文件夹，右键属性-共享<br>2、点击高级设置-”勾上共享此文件“，共享名（别人看到的文件的名字，不一定是自己文件的名字）<br>3、点击-权限，有一个内置组Everyone，只有读取的一个权限，<br>4、尝试把权限修改为：完全控制权限<br>5、然后在客户机cmd输入UNC地址：\192.168.1.132:客户机ip地址或者文件的共享名(\:网络共享的专属地址符号，一个\是本地路径，两个\即网络路径）<br>6、本机新建一个普通用户给客户机登录<br>7、远程共享和本地共享NTFS权限的共同影响，最终取其交集，所以设置高级共享权限为完全控制，然后具体的权限需求在NTFS设置<br>8、保证客户机能进入文件夹，然后再对文件里面的东西进行二次安全设置权限</p>
+<p>##DHCP续约<br>当50%过后，客户机再次发送DHC Request 包进行续约，如果服务器无响应，则继续使用并在87.5%再次发送<br>HC Request 包进行续约。当再无响应时，则释放ip地址，然后重新发送Discovery广播包获取新的ip地址，<br>当服务器无任何响应时，自动给自己分配一个169.254.x.x/16(全球统一无效地址，用于内网通信）.</p>
 <hr>
-<p>##<br>whoami   #我的身份是<br>whoami /user   #用户的信息</p>
-<p>共享名：文件名$       #隐藏共享名<br>要想访问隐藏共享文件，输入:   \ip地址\文件名$</p>
-<p>net localgroup  #列出组列表<br>net share          #列出共享文件列表</p>
-<p>net share ged /del               #删除共享名为ged的文件<br>net share c$=c:\            #添加一个共享名为c的隐藏文件，他的物理路径在c:/<br>要想屏蔽系统隐藏共享的自动产生，可以通过服务管理禁用Server 445端口号，可以通过修改注册表信息来实现（百度知识点）</p>
-<p>注册表：相当于户籍科，记录程序的一些信息<br>打开注册表编辑器：regedit<br>打开服务管理窗口：services.mac</p>
+<p>##部署DHCP服务器<br>DHCP端口号：UDP 67/68</p>
+<p>1、配置静态的ip地址<br>2、安装DHCP组件<br>3、配置地址池</p>
+<p>ipconfig /release      #释放ip（取消租约）<br>ipconfig /renew        #无ip发送discovery 重新获取ip，如果已经存在ip发送的是request包续约时间</p>
+<p>地址保留是为一个唯一的MAC地址设计的固定动态分配ip地址<br>备份作用域和恢复<br>服务器的地址与提供地址的作用域的网段必须得一样</p>
+<p>选项优先级：<br>作用域选项&gt;服务器选项<br>当服务器上有多个作用域时，可以在服务器上设置DNS服务器</p>
+<hr>
+<p>##DHCP攻击防御<br>1、攻击DHCP服务器：频繁的发送伪造（MAC地址）的DHCP请求，直到耗尽DHCP的地址池<br>     防御：在交换机上（管理型）的端口上做动态的MAC地址绑定</p>
+<p>2、伪装DHCP服务器攻击：hack通过将自己部署为DHCP服务器，为客户机提供非法的ip地址<br>     防御：在交换机上（管理型），除合法的DHCP服务器所在接口外，全部设置为禁止发送dhcp offer包</p>
 
             </div>
             <hr/>
@@ -496,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">http://yoursite.com/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/</a>
+                    <a href="http://yoursite.com/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">http://yoursite.com/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -703,26 +707,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
+                <a href="/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="DHCP部署与安全">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="DNS部署与安全">
                         
-                        <span class="card-title">DHCP部署与安全</span>
+                        <span class="card-title">DNS部署与安全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-##DHCP作用：自动分配ip地址地址池：(ip、子网掩码、网关、DNS、租期)
-##DHCP原理（租赁过程）四个步骤：1、客户机发送DHCP Discovery广播包      客户机广播请求ip地址（包含客户机的MAC地址“电脑的唯一
+                            DNS（Domain Name Service 域名服务）端口：TCP、UDP53– #域名组成1、“www.sina.com.cn&quot; 是一个域名，www是主机名+域名
+一般网站的www，博客的是blog，论坛的是bbs，nslo
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-27
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
                         </span>
                         <span class="publish-author">
                             
@@ -742,26 +745,25 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/25/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+                <a href="/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="用户管理与系统密码破解">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NFTS权限和cifs服务器">
                         
-                        <span class="card-title">用户管理与系统密码破解</span>
+                        <span class="card-title">NFTS权限和cifs服务器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-SID（安全标识符）widows系统管理员administrator的UID是500，加administrator的UID是501开始其他普通用户的UID是1000开始
-##内置账号用户密码存储位置：C:\windows\system32
+                            一、文件系统：存储文件格式格式化==制作文件系统ACL==访问控制列表只有NTFS才能设置权限
+– #例：先创建两个用户，a、b两个用户同属于users组文件属性打开-安全权限：修改（包含读取、运行、写入、删除）不包括对权限的修改特殊权限：
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
                             </span>
                         <span class="publish-author">
                             
