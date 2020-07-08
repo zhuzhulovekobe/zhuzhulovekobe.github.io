@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="DHCP部署与安全, Hexo">
+    <meta name="keywords" content="简单渗透测试, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>DHCP部署与安全 | Hexo</title>
+    <title>简单渗透测试 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">DHCP部署与安全</h1>
+                    <h1 class="description center-align post-title">简单渗透测试</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-27
+                    2020-07-04
                 </div>
                 
 
@@ -458,23 +458,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>##<br>DHCP作用：自动分配ip地址<br>地址池：(ip、子网掩码、网关、DNS、租期)</p>
-<p>##<br>DHCP原理（租赁过程）<br>四个步骤：<br>1、客户机发送DHCP Discovery广播包<br>      客户机广播请求ip地址（包含客户机的MAC地址“电脑的唯一标识”）</p>
-<p>2、服务器响应DHCP offer广播包<br>     服务器响应提供的ip地址（无子网掩码，网关等信息）</p>
-<p>3、客户机发送DHCP Request广播包  （意为选择了这个ip地址，然后请求这个ip的其他参数信息都给我）<br>     客户机选择ip</p>
-<p>4、发送DHCP ACK广播包 （ACK：确认）<br>      服务器确定了租约，并且提供网卡的子网掩码、网关、DNS、租期等信息。</p>
+                <p>##常见的端口号对应的服务<br>21：FTP                           443：HTTPS<br>22：SSH                          1433：SQL Server<br>23：Telnet                       1521：Oracle<br>25：SMTP                        3306：MySQL<br>80：HTTP                        3389：RDP</p>
+<p>nmap用法：<br>-sP                 –ping扫描ip地址<br>-P                  –扫描指定端口<br>-sV                –扫描服务版本信息<br>-O                 –扫描端口开放信息和设备版本信息<br>-A                 –全面扫描<br>-oN              –保存扫描结果并txt文件</p>
+<p>nmap -sP 10.1.1.0/24   #扫描在10.1.1网段的所有ip和mac地址<br>nmap -O 10.1.1.1   #扫描10.1.1.1的端口开放信息和设备的版本信息<br>nmap -p 21，23，80 10.1.1.1    #只扫描10.1.1.1的21，23和80端口的开放情况（p是port）<br>nmap -p 21，23，80 10.1.1.1 -sV   #只扫描10.1.1.1的21，23和80端口的开放情况（p是port）并且查看发布的端口的后台软件<br>nmap -O 10.1.1.1 -oN d:\baogao.txt     #生成扫描结果并且保存到d盘的baogao.txt文件中</p>
+<p>九头蛇（cd到九头蛇安装目录下进行：<br>hydra.exe -L a -p 123 10.1.1.1 telnet   #猜测telent服务的用户名是a 密码是123<br>hydra.exe -L a -P e:\pass.txt 10.1.1.1 telent  #使用九头蛇暴力破解a的密码，并且使用的字典的绝对路径在e:\password.txt下<br>hydra.exe -L a -P e:\pass.txt 10.1.1.1 ftp<br>hydra.exe -L a -P e:\pass.txt 10.1.1.1 telent<br>hydra.exe -L e:\user.txt -P e:\pass.txt 10.1.1.1 telent  #暴力破解telent的用户名和密码<br>授权<br>1、信息收集<br>      nslookup whois<br>2、扫描漏洞<br>     namp=ip范围 端口 80 （IIS，apache，什么网站）<br>     高级扫描：IIS漏洞2003-IIS6.0 2008IIS7.0<br>                      扫描网站漏洞<br>3、漏洞利用</p>
+<h2 id="4、提权（shell环境、桌面环境、最高权限）"><a href="#4、提权（shell环境、桌面环境、最高权限）" class="headerlink" title="4、提权（shell环境、桌面环境、最高权限）"></a>4、提权（shell环境、桌面环境、最高权限）</h2><p>5、毁尸灭迹<br>6、留后门<br>7、渗透测试报告</p>
 <hr>
-<p>##DHCP续约<br>当50%过后，客户机再次发送DHC Request 包进行续约，如果服务器无响应，则继续使用并在87.5%再次发送<br>HC Request 包进行续约。当再无响应时，则释放ip地址，然后重新发送Discovery广播包获取新的ip地址，<br>当服务器无任何响应时，自动给自己分配一个169.254.x.x/16(全球统一无效地址，用于内网通信）.</p>
+<p>手工测试端口号开发：telnet ip地址 端口号       来测试是否开启相应端口</p>
 <hr>
-<p>##部署DHCP服务器<br>DHCP端口号：UDP 67/68</p>
-<p>1、配置静态的ip地址<br>2、安装DHCP组件<br>3、配置地址池</p>
-<p>ipconfig /release      #释放ip（取消租约）<br>ipconfig /renew        #无ip发送discovery 重新获取ip，如果已经存在ip发送的是request包续约时间</p>
-<p>地址保留是为一个唯一的MAC地址设计的固定动态分配ip地址<br>备份作用域和恢复<br>服务器的地址与提供地址的作用域的网段必须得一样</p>
-<p>选项优先级：<br>作用域选项&gt;服务器选项<br>当服务器上有多个作用域时，可以在服务器上设置DNS服务器</p>
-<hr>
-<p>##DHCP攻击防御<br>1、攻击DHCP服务器：频繁的发送伪造（MAC地址）的DHCP请求，直到耗尽DHCP的地址池<br>     防御：在交换机上（管理型）的端口上做动态的MAC地址绑定</p>
-<p>2、伪装DHCP服务器攻击：hack通过将自己部署为DHCP服务器，为客户机提供非法的ip地址<br>     防御：在交换机上（管理型），除合法的DHCP服务器所在接口外，全部设置为禁止发送dhcp offer包</p>
+<p>445漏洞利用之IPC$:<br>net use f: \10.1.1.2\share 密码 /user：用户<br>net use f: /del<br>net use * /del<br>net use f: \10.1.1.2\c$ 密码 /user：用户<br>net use f: \10.1.1.2\ipc$ 密码 /user：用户</p>
+<p>暴力破解系统密码之445：</p>
 
             </div>
             <hr/>
@@ -500,7 +493,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">http://yoursite.com/2020/06/27/DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/</a>
+                    <a href="http://yoursite.com/2020/07/04/%E7%AE%80%E5%8D%95%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">http://yoursite.com/2020/07/04/%E7%AE%80%E5%8D%95%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -707,25 +700,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
+                <a href="/2020/07/06/TCPIP%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%8E%9F%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="DNS部署与安全">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="TCP/IP五层协议与交换机原理">
                         
-                        <span class="card-title">DNS部署与安全</span>
+                        <span class="card-title">TCP/IP五层协议与交换机原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            DNS（Domain Name Service 域名服务）端口：TCP、UDP53客户机向DNS服务器请求时使用UDP协议DNS主服务器和DNS辅助服务器使用的协议是TCP协议
-– #域名组成1、“www.sina.com.cn&quot;
+                            传输单元         名称                                                     工作设备           协议数据/PDU      应用层                    
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-06
                         </span>
                         <span class="publish-author">
                             
@@ -745,25 +737,27 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/26/NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <a href="/2020/07/04/%E5%9F%9F%E4%B8%8EPKI/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NFTS权限和cifs服务器">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="域(Domain)与PKI(Public KEY Infrastructure）">
                         
-                        <span class="card-title">NFTS权限和cifs服务器</span>
+                        <span class="card-title">域(Domain)与PKI(Public KEY Infrastructure）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、文件系统：存储文件格式格式化==制作文件系统ACL==访问控制列表只有NTFS才能设置权限
-– #例：先创建两个用户，a、b两个用户同属于users组文件属性打开-安全权限：修改（包含读取、运行、写入、删除）不包括对权限的修改特殊权限：
+                            1、内网环境：1）工作组：默认模式，人人平等，不方便管理2）域：人人不平等，集中管理，统一管理
+2、域的特点：集中/统一管理
+
+PKI1、PKI概述名称：Public KEY Infrastructure 公钥基础设施作用：通过加密技术和数
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-04
                             </span>
                         <span class="publish-author">
                             

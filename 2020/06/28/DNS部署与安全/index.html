@@ -458,7 +458,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53"><a href="#DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53" class="headerlink" title="DNS（Domain Name Service 域名服务）端口：TCP、UDP53"></a>DNS（Domain Name Service 域名服务）端口：TCP、UDP53</h2><p>– #域名组成<br>1、“<a href="http://www.sina.com.cn&quot;" target="_blank" rel="noopener">www.sina.com.cn&quot;</a> 是一个域名，www是主机名+域名</p>
+                <h2 id="DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53"><a href="#DNS（Domain-Name-Service-域名服务）端口：TCP、UDP53" class="headerlink" title="DNS（Domain Name Service 域名服务）端口：TCP、UDP53"></a>DNS（Domain Name Service 域名服务）端口：TCP、UDP53</h2><p>客户机向DNS服务器请求时使用UDP协议<br>DNS主服务器和DNS辅助服务器使用的协议是TCP协议</p>
+<p>– #域名组成<br>1、“<a href="http://www.sina.com.cn&quot;" target="_blank" rel="noopener">www.sina.com.cn&quot;</a> 是一个域名，www是主机名+域名</p>
 <p>一般网站的www，博客的是blog，论坛的是bbs，<br>nslookup <a href="http://www.xxx.com.cn" target="_blank" rel="noopener">www.xxx.com.cn</a>    #查看域名信息</p>
 <p>客户机发送百度请求，先在本地DNS服务器查找相应的缓存，如果有缓存就直接访问目标，如果无百度的缓存信息。<br>如果无 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>. 的信息先访问根域”.”,找到2.2.2.2（.com. 的域名服务器）<br>然后在3.3.3.3找到<a href="http://www.100.1.1.1的DNS服务器，成功访问并且保存缓存" target="_blank" rel="noopener">www.100.1.1.1的DNS服务器，成功访问并且保存缓存</a></p>
 <p>递归查询（本地DNS服务器与客户机之间，DNS转发器）：问啥答啥<br>迭代查询(DNS服务器与根之间）：问啥不答啥</p>
@@ -477,6 +478,9 @@
 <p>辅助区域：<br>源服务器准备：右键我们要传送的区域-属性-区域传送-允许区域传送只允许到目标服务器（添加目标服务器ip）<br>目标服务器：<br>1、新建辅助区域<br>2、输入区域名称<br>3、输入要源头的ip地址添加，刷新即可</p>
 <p>转发器：<br>外网服务器：新建区域：jd.com  新建主机名称：www ip地址：7.7.7.7<br>客户机：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> 无法解析<br>公司服务器：右键win-wxf-属性-转发器-添加外网服务器的ip地址<br>客户机：nslookup <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> 可以解析</p>
 <p>客户机请求域名-缓存-host文件-请求给服务器<br>服务器发送请求-再看缓存-自己负责的区域-根</p>
+<hr>
+<p>##DNS服务器分类<br>主要名称服务器<br>辅助名称服务器<br>根名称服务器<br>高速缓存名称服务器</p>
+<p>ipconfig /all   #<br>ipconfig /release   #dhcp的ip地址毁约<br>ipconfig /renew    #租约<br>ipconfig /displaydns   #查看dns缓存<br>ipconfig /flushdns    #清空dns缓存</p>
 
             </div>
             <hr/>
@@ -705,31 +709,32 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/06/28/DNS%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">
+                <a href="/2020/07/01/web/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="DNS部署与安全">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="WEB服务器和FTP服务器">
                         
-                        <span class="card-title">DNS部署与安全</span>
+                        <span class="card-title">WEB服务器和FTP服务器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            DNS（Domain Name Service 域名服务）端口：TCP、UDP53– #域名组成1、“www.sina.com.cn&quot; 是一个域名，www是主机名+域名
-一般网站的www，博客的是blog，论坛的是bbs，nslo
+                            WEB服务器1、WEB服务器也称为 网页服务器或HTTP服务器
+2、WEB服务器使用的协议是HTTP或HTTPS
+3、HTTP协议端口：TCP 80     HTTPS协议端口：TCP 443     FTP协议端口：TCP 21
+4、WE
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -738,7 +743,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
