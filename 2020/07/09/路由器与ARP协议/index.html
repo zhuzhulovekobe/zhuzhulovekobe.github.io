@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="TCP/IP五层协议与交换机原理, Hexo">
+    <meta name="keywords" content="路由器原理与ARP协议, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>TCP/IP五层协议与交换机原理 | Hexo</title>
+    <title>路由器原理与ARP协议 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">TCP/IP五层协议与交换机原理</h1>
+                    <h1 class="description center-align post-title">路由器原理与ARP协议</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-06
+                    2020-07-09
                 </div>
                 
 
@@ -458,13 +458,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>传输单元         名称                                                     工作设备           协议<br>数据/PDU      应用层                                                    PC/防火墙       HTTP/HTTPS/SSH/Telent/   FTP    /  DHCP  /POP3/  RDP  /    SMB   /   Mysql     /DNS<br>                                                                                                            80    443      22     23       20/21     67/68    110     3389        445        3306         53<br>数据段/段      传输层                                                     防火墙            TCP UDP<br>报文/包/ip包  网络层  （我们抓包抓的是这里的数据）    路由器            ICMP  IP(TCP和UDP下来经过ip协议封装ip包头）  ARP<br>帧 Frame       数据链路层                                              交换机/网卡    MAC子层协议<br>比特bit          物理层                                                     网线                数据流<br>8bit（最小单位） = 1Byte字节       100mb/s</p>
+                <p>ip包头字节：20-60  #20字节是常用</p>
+<p>路由：路由器为IP包选择路径的过程</p>
+<p>show ip route    #查看路由表<br>路由表优先级：C（直连路由）&gt;S（静态路由）&gt;S*（默认路由）</p>
+<p>静态路由：<br>conf t<br>ip route 目标网段 子网掩码 下一跳IP<br>如：<br>ip router 70.1.1.0 255.255.255.0 20.1.1.2</p>
+<p>默认路由：<br>conf t<br>ip route 0.0.0.0 0.0.0.0 下一跳ip</p>
+<p>浮动路由：<br>在静态或默认路由后空格+正整数</p>
 <hr>
-<p>数据链路层（2层 Data Link Layer）<br>1、属于2层<br>2、传输单元：帧<br>3、帧结构（一个数据帧长度为：1500+14+4=1518字节）：<br>      1）帧格式：802.3（有线网卡）<br>       IEEE 802     802.11（无线网卡）<br>      2）帧头：目标MAC（6字节）、源MAC（6字节）、类型（2字节）（0x0800（0x代表16进制）：IP协议       0x0806：ARP协议）<br>       类型字段的作用：识别上层协议，为上层提供服务<br>       MAC地址：也叫物理地址，全球唯一，长度：4*12=48位（每一个16进制可以换算为4个2bit进制）、1 bit=6 Byte   6字节<br>      3）上三层数据的MTU值：最大传输单元为1500字节<br>      4）帧尾：4字节</p>
+<p>广播：将广播地址做为目的地址的数据帧<br>广播域：网络中能接收到同一广播所有节点的集合</p>
+<p>MAC地址广播为：FF-FF-FF-FF-FF-FF<br>IP地址广播：255.255.255.255<br>广播IP地址为IP地址网段的广播地址：192.168.1.255/24</p>
+<p>ARP:<br>地址解析协议，将一个以知的ip地址解析成MAC地址</p>
+<p>arp -a ：查看ARP缓存<br>arp -d ：清除ARP缓存<br>arp -s  ：ARP绑定</p>
+<p>ARP：<br>1、原理：1）发送ARP广播请求<br>                     ARP报文内容：我是10.1.1.1 我的MAC：AA<br>                                            谁是10.1.1.3  你的MAC：？<br>                2）接收ARP单播应答<br>2、ARP攻击或者欺骗的原理是：<br>      通过发送伪造虚假的ARP报文（广播或者单播）<br>来实现的攻击或者欺骗<br>      如虚假报文的mac是伪造的不存在的，实现ARP攻击，结果为中断通信/断网<br>      如虚假报文的mac是攻击者自己的mac地址，实现ARP欺骗，结果可以监听、窃取、篡改、控制流量，但不中断通信</p>
+<p>3、ARP协议没有验证机制</p>
+<p>4、ARP攻击者通过发送虚假伪造的arp报文对受害者进行ARP缓存投毒</p>
 <hr>
-<p>交换机工作原理:<br>1、收到一个数据帧<br>2、学习帧中的源MAC地址来形成MAC地址表<br>3、然后检查帧中的目标MAC地址，并匹配MAC地址表：<br>       如表中有匹配项，则单播转发<br>       如表中无匹配项，则除接收端口外广播转发<br>4、MAC地址表的老化时间默认是300秒（可修改）</p>
-<p>E：10M<br>F:100M<br>G:1000M<br>Te:10000M<br>接口速率自适应：1000/100/10M自适应<br>速率工作模式可以为10，100，1000任何一种状态</p>
-<p>端口状态：up/down<br>down 3种可能：<br>1）人工down掉<br>2）速率不匹配<br>3）双工模式不匹配（双工duplex）<br>     双工模式：单工（bb机只能接收信息）、半双工（对讲机能听不能讲或者能讲不能听）、全双工（手机）</p>
+<p>可以配ip才有mac地址</p>
+<p>5、路由器的工作原理<br>1）收到数据帧，路由器查看帧头目标mac地址是不是自己，是就解封装并且送到路由器内部，不是就丢弃。<br>2）检查ip包头的目标ip地址，对照路由表，如果匹配失败则丢弃，并向源ip回馈错误信息，如匹配成功，则将ip包路由到出接口<br>3）封装帧，首先将出接口的mac地址作为源mac封装好，然后检查ARP缓存表，检查是否有下一跳的mac地址，如有，将提取并且作为目标mac地址<br>封装到帧中，如果没有，则发送一个ARP广播请求下一跳的MAC，并且获取对方的mac地址，再记录到缓存中，并且封装帧，最后将帧发送出去。</p>
 
             </div>
             <hr/>
@@ -490,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/06/TCPIP%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%8E%9F%E7%90%86/">http://yoursite.com/2020/07/06/TCPIP%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%8E%9F%E7%90%86/</a>
+                    <a href="http://yoursite.com/2020/07/09/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8EARP%E5%8D%8F%E8%AE%AE/">http://yoursite.com/2020/07/09/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8EARP%E5%8D%8F%E8%AE%AE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -693,9 +703,51 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/07/09/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8EARP%E5%8D%8F%E8%AE%AE/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="路由器原理与ARP协议">
+                        
+                        <span class="card-title">路由器原理与ARP协议</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ip包头字节：20-60  #20字节是常用
+路由：路由器为IP包选择路径的过程
+show ip route    #查看路由表路由表优先级：C（直连路由）&gt;S（静态路由）&gt;S*（默认路由）
+静态路由：conf tip rout
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/07/08/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%91%BD%E4%BB%A4/">
                     <div class="card-image">
@@ -713,45 +765,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-08
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/07/04/%E7%AE%80%E5%8D%95%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="简单渗透测试">
-                        
-                        <span class="card-title">简单渗透测试</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            ##常见的端口号对应的服务21：FTP                           443：HTTPS22：SSH                          1433：SQL Server23：Telnet         
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-08
                             </span>
                         <span class="publish-author">
                             
