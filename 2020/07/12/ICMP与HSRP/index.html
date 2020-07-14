@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="路由器原理与ARP协议, Hexo">
+    <meta name="keywords" content="ICMP与HSRP, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>路由器原理与ARP协议 | Hexo</title>
+    <title>ICMP与HSRP | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">路由器原理与ARP协议</h1>
+                    <h1 class="description center-align post-title">ICMP与HSRP</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-09
+                    2020-07-12
                 </div>
                 
 
@@ -458,28 +458,22 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>ip包头字节：20-60  #20字节是常用</p>
-<p>路由：路由器为IP包选择路径的过程</p>
-<p>show ip route    #查看路由表<br>路由表优先级：C（直连路由）&gt;S（静态路由）&gt;S*（默认路由）</p>
-<p>静态路由：<br>conf t<br>ip route 目标网段 子网掩码 下一跳IP<br>如：<br>ip router 70.1.1.0 255.255.255.0 20.1.1.2</p>
-<p>默认路由：<br>conf t<br>ip route 0.0.0.0 0.0.0.0 下一跳ip</p>
-<p>浮动路由：<br>在静态或默认路由后空格+正整数</p>
+                <p>网络层协议：IP ARP ICMP<br>只有应用层协议有端口，其他无端口</p>
+<p>#ICMP协议是干什么的？<br>网络探测与回馈机制<br>1、网络探测<br>2、路由跟踪<br>3、错误反馈</p>
+<p>#ICMP协议的封装格式：<br>icmp头+数据<br>icmp头：ICMP类型、代码<br>icmp类型字段：<br>类型8：ping请求<br>类型0：ping应答<br>类型3：目标主机不可达<br>类型11：TTL超时，原因是路由环路</p>
 <hr>
-<p>广播：将广播地址做为目的地址的数据帧<br>广播域：网络中能接收到同一广播所有节点的集合</p>
-<p>MAC地址广播为：FF-FF-FF-FF-FF-FF<br>IP地址广播：255.255.255.255<br>广播IP地址为IP地址网段的广播地址：192.168.1.255/24</p>
-<p>ARP:<br>地址解析协议，将一个以知的ip地址解析成MAC地址</p>
-<p>arp -a ：查看ARP缓存<br>arp -d ：清除ARP缓存<br>arp -s  ：ARP绑定</p>
-<p>ARP：<br>1、原理：1）发送ARP广播请求<br>                     ARP报文内容：我是10.1.1.1 我的MAC：AA<br>                                            谁是10.1.1.3  你的MAC：？<br>                2）接收ARP单播应答<br>2、ARP攻击或者欺骗的原理是：<br>      通过发送伪造虚假的ARP报文（广播或者单播）<br>来实现的攻击或者欺骗<br>      如虚假报文的mac是伪造的不存在的，实现ARP攻击，结果为中断通信/断网<br>      如虚假报文的mac是攻击者自己的mac地址，实现ARP欺骗，结果可以监听、窃取、篡改、控制流量，但不中断通信</p>
-<p>3、ARP协议没有验证机制</p>
-<p>4、ARP攻击者通过发送虚假伪造的arp报文对受害者进行ARP缓存投毒</p>
+<p>#三层交换机：<br>1、三层交换机 = 三层路由+二层交换机<br>2、三层路由引擎是可以关闭或者开启的<br>     conf t<br>     ip routing   #开启三层路由功能<br>     no ip routing  #关闭三层路由功能<br>3、三层交换机的优点：<br>与单臂路由相比较：<br>1）解决了网络瓶颈问题<br>2）解决了单点故障（虚拟接口不再依赖如何的物理接口）</p>
+<p>CEF表(快速转发)  邻接关系表<br>vlan20 20.1.1.1 - BB CC</p>
+<p>3)一次路由，永久交换</p>
+<p>4、三层交换机上起虚拟接口（为其配置vlan的网关）<br>int vlan 10   #给vlan10起网关，<br>ip add 10.1.1.254 255.255.255.0<br>no shut<br>exit</p>
+<p>6、三层路由的思路<br>一、交换部分<br>1）Trunk                 #switchport mode trunk<br>2）VTP                   #vtp domain kobe<br>3）创建vlan            #vlan 10<br>4）分配端口到vlan    #switchport access vlan 10<br>5）起三层虚拟接口     #ip routing    int vlan 10 ip add 10.1.1.254 255.255.255.0<br>二、路由部分<br>1）配置ip，开启<br>int f0/1<br>ip add<br>no switchport<br>2）配置路由</p>
 <hr>
-<p>可以配ip才有mac地址</p>
-<p>5、路由器的工作原理<br>1）收到数据帧，路由器查看帧头目标mac地址是不是自己，是就解封装并且送到路由器内部，不是就丢弃。<br>2）检查ip包头的目标ip地址，对照路由表，如果匹配失败则丢弃，并向源ip回馈错误信息，如匹配成功，则将ip包路由到出接口<br>3）封装帧，首先将出接口的mac地址作为源mac封装好，然后检查ARP缓存表，检查是否有下一跳的mac地址，如有，将提取并且作为目标mac地址<br>封装到帧中，如果没有，则发送一个ARP广播请求下一跳的MAC，并且获取对方的mac地址，再记录到缓存中，并且封装帧，最后将帧发送出去。</p>
-<hr>
-<p>ARP攻击防御：<br>1、静态ARP绑定<br>     手工绑定/双向绑定<br>     windows客户机上：<br>     arp -s 10.1.1.254 00-01-2c-a0-e1-23  #设置静态mac地址绑定<br>     arp -a  #查看ARP缓存</p>
-<p>2、ARP防火墙<br>     自动绑定静态ARP<br>     主动防御</p>
-<p>3、硬件级ARP防御：<br>     交换机支持“端口”做动态ARP绑定（配合DHCP服务器）<br>     或做静态ARP绑定</p>
-<p>conf t<br>ip dhcp snooping   #开启dhcp监听功能<br>int range f0/1 - 48</p>
+<p>HSRP协议（cisco专有）/VRRP协议（通用）<br>#HSRP<br>热备份路由协议<br>1、HSRP组号：1-225  没有大小之分<br>2、虚拟路由器的ip称为虚拟ip地址<br>3、HSRP组的成员：<br>1）虚拟路由器（老大）<br>2）活跃路由器<br>3）备份路由器<br>4）其他路由器</p>
+<p>4、HSRP优先级:1-255 越大默认优先级越高，一般默认为100<br>5、HSRP组成员通过定时发送hello包来交流，默认每隔3秒一个hello包，坚持10秒<br>6、占先权preempt<br>作用：当检测不到对方，或者检测到对方优先级比自己低时，立即抢占活跃路由的名分</p>
+<p>7、配置跟踪track，跟踪外网端口状态，但外网down掉，则自降优先级</p>
+<p>活跃路由器：<br>inf f0/0           ：hsrp协议是在端口进行配置的<br>standby 1 ip 192.168.1.252       ：standby是备份的意思，建立组1，并且配置虚拟路由ip为。252<br>standby 1 priority 200     ：priority是优先级的意思，设置优先级为200<br>standby 1 preempt         ：preempt是占用权，开启占用权<br>standby 1 track f0/1        ：跟踪路由接口为f0/1，用于判断是否不可通信</p>
+<p>备用路由器：<br>inf f0/0<br>standby 1 ip 192.168.1.152<br>standby 1 priority 195<br>standby 1 prempt</p>
+<p>查看hsrp状态：<br>show standby brief       ：show standby的简要信息<br>show standby               ：默认show的是standby的详细信息</p>
 
             </div>
             <hr/>
@@ -505,7 +499,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/09/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8EARP%E5%8D%8F%E8%AE%AE/">http://yoursite.com/2020/07/09/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8EARP%E5%8D%8F%E8%AE%AE/</a>
+                    <a href="http://yoursite.com/2020/07/12/ICMP%E4%B8%8EHSRP/">http://yoursite.com/2020/07/12/ICMP%E4%B8%8EHSRP/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -708,9 +702,50 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/07/12/ICMP%E4%B8%8EHSRP/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ICMP与HSRP">
+                        
+                        <span class="card-title">ICMP与HSRP</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            网络层协议：IP ARP ICMP只有应用层协议有端口，其他无端口
+#ICMP协议是干什么的？网络探测与回馈机制1、网络探测2、路由跟踪3、错误反馈
+#ICMP协议的封装格式：icmp头+数据icmp头：ICMP类型、代码icmp类型字段：
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/07/11/VLAN/">
                     <div class="card-image">
@@ -730,45 +765,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-11
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/07/08/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%91%BD%E4%BB%A4/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="交换机基本工作模式及命令">
-                        
-                        <span class="card-title">交换机基本工作模式及命令</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            五大基本模式：1、用户模式：switch&gt; （可以查看交换机的基本简单信息，且不能做任何修改配置）2、特权模式：switch#  （可以查看所有配置，且不能修改配置，但可以测试、保存、初始化等操作）3、全局配置模式：switch(co
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-11
                             </span>
                         <span class="publish-author">
                             
