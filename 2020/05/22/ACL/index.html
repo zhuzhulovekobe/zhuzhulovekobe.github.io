@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
+    <meta name="keywords" content="ACL(Access Control List), Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Hexo</title>
+    <title>ACL(Access Control List) | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">ACL(Access Control List)</h1>
                 </div>
             </div>
         </div>
@@ -458,19 +458,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <p>1、ACL是一种包过滤技术</p>
+<p>2、ACL基于IP包头的IP地址、四层TCP/UDP头部的端口号、【5层数据】<br>           基于三层和四四层过滤<br>3、ACL在路由器上配置，也可以在防火墙上配置（一般称为策略）</p>
+<p>5、ACL主要分为2大类：<br>1）标准ACL<br>2）扩展ACL</p>
+<p>6、标准ACL：<br>     表号：1-99<br>     特点：只能基于源IP对包进行过滤<br>     命令：<br>     conf t<br>     access-list 表号 permit/deny 源IP或者源网段 反子网掩码<br>     注释：反子网掩码，将正子网掩码0和1倒置<br>               255.0.0.0 – 0.255.255.255<br>     反子网掩码作用：用来匹配，与0对应的需要严格匹配，与1对应的忽略</p>
+<pre><code>例如：access-list 1 deny 10.1.3.1 0.0.0.255
+反子网掩码有3个0，所以严格匹配ip地址的前三位10.1.3，只要ip是10.1.3就符合要求
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+access-list 1 deny 10.1.3.1 0.0.0.0
+如果有4个0就是down掉具体的ip
+简写：access-list 1 deny host 10.1.3.1
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+access-list 1 deny 0.0.0.0 255.255.255.255
+如果有4个255就是down掉所有人
+简写：access-list 1 deny any  </code></pre><p>查看ACL表：<br>show ip access-list [表号]    (表少的话不用加表号直接show）</p>
+<p>将ACL应用到接口：<br>int f0/x<br>ip access-group 表号 in/out<br>exit</p>
+<p>7、扩展ACL：<br>     表号：100-199<br>     特点：可以基于源IP、目标IP、端口号、协议等对包进行过滤</p>
+<p>access-list 100 permit/deny 协议 源IP或者源网段 反子网掩码 目标IP或者源网段 反子网掩码 [eq 端口号] </p>
+<p>eq的意思是等于=</p>
+<p>注释：协议：tcp/udp/icmp/ip  （tcp和udp搭配端口号）<br>案例：<br>acc 100 permit tcp host 10.1.1.1 host 20.1.1.3 eq 80<br>acc 100 deny ip host’ 10.1.1.20 20.1.1.0 0.0.0.255<br>acc 100 permit ip any any</p>
+<p>deny 拒绝<br>permit</p>
+<p>8、ACL原理<br>1）ACL表必须应用到接口的进或者出反向才生效<br>2）一个接口的一个方向只能应用一张表<br>3）进还是出方向的应用是取决于流量控制的总方向<br>4）ACL表是严格自上而下检查每一条，所以要注意书学顺序<br>5）每一条是由条件和动作组成，当流量完成满足条件则放行，当某流量没有满足某条件时，则继续检查下一条<br>6）标准ACL尽量写在靠近目标的地方<br>7）原理：<br>     1、做流量控制，首先要先判断ACL写的位置（哪个路由器？哪个接口哪个方向）<br>     2、再考虑怎么写ACL<br>     3、如何写<br>          首先判断最终要允许所有还是拒绝所有<br>          然后写的时候要注意：将严格的控制写在前面</p>
+<p>8）一般情况下，标准或者扩展ACL一旦编写好，无法修改某一条，也无法删除某一条，也无法修改顺序。<br>也无法往中间插入新的条目，只能一直在最后添加新的条目。<br>     如想修改或者插入、删除，只能删除整张表重新写。<br>     命令：<br>     conf t<br>     no access-list 表号 </p>
+<p>查看ACL表：<br>show ip access-list [表号]    (表少的话不用加表号直接show）</p>
+<p>9、面名ACL：<br>     作用：可以对标准或者扩展ACL进行自定义命名<br>     优点：自定义命名更加容易辨认，也便于记忆<br>               可以任意修改某一条，或者删除某一条，也可以往中间插入某一条<br>    命令：<br>conf t<br>ip access-list standard/extended 自定义表面<br>开始deny或者permit编写ACL条目<br>exit</p>
+<p>删除某一条：<br>ip access-list standard/extended 自定义表名<br>no 条目 ID<br>exit</p>
+<p>插入某一条：<br>ip access-list standard/extended 自定义表名<br>条目 ID 动作 条件<br>exit            </p>
+<p>SW3-1(config)#ip access-list extended cw<br>SW3-1(config-ext-nacl)#den<br>SW3-1(config-ext-nacl)#deny ip 192.168.1.0 0.0.0.255 host 192.168.3.1<br>SW3-1(config-ext-nacl)#deny ip 192.168.2.0 0.0.0.255 host 192.168.3.1<br>SW3-1(config-ext-nacl)#deny ip 192.168.4.0 0.0.0.255 host 192.168.3.1<br>SW3-1(config-ext-nacl)#per<br>SW3-1(config-ext-nacl)#permit ip any hos<br>SW3-1(config-ext-nacl)#permit ip any host 192.168.3.1<br>SW3-1(config-ext-nacl)#do show ip acc<br>Extended IP access list xs<br>    10 deny ip host 192.168.1.1 any<br>    20 permit ip any any<br>Extended IP access list cw<br>    10 deny ip 192.168.1.0 0.0.0.255 host 192.168.3.1<br>    20 deny ip 192.168.2.0 0.0.0.255 host 192.168.3.1<br>    30 deny ip 192.168.4.0 0.0.0.255 host 192.168.3.1<br>    40 permit ip any host 192.168.3.1</p>
 
             </div>
             <hr/>
@@ -496,7 +510,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/05/22/hello-world/">http://yoursite.com/2020/05/22/hello-world/</a>
+                    <a href="http://yoursite.com/2020/05/22/ACL/">http://yoursite.com/2020/05/22/ACL/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -703,21 +717,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/05/22/ACL/">
+                <a href="/2020/05/22/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ACL(Access Control List)">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="个人博客搭建&lt;基于Windows系统&gt;">
                         
-                        <span class="card-title">ACL(Access Control List)</span>
+                        <span class="card-title">个人博客搭建&lt;基于Windows系统&gt;</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1、ACL是一种包过滤技术
-2、ACL基于IP包头的IP地址、四层TCP/UDP头部的端口号、【5层数据】           基于三层和四四层过滤3、ACL在路由器上配置，也可以在防火墙上配置（一般称为策略）
-5、ACL主要分为2大类：1
+                            第一步（软件的环境的安装）– #安装Nodejs，安装提示下一步下一步就ok，最好安装git，用起来少坑。安装完成：node -v #查看node版本npm和node是一起安装的同理：nmp -v #查看nmp版本因为npm是基于国外的源，
                         
                     </div>
                     <div class="publish-info">
@@ -739,7 +751,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/05/22/hello-world/">
@@ -769,7 +781,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

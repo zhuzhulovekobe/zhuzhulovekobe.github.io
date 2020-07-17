@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
+    <meta name="keywords" content="NAT(Network Address Translations, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Hexo</title>
+    <title>NAT(Network Address Translations | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">NAT(Network Address Translations</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-05-22
+                    2020-07-16
                 </div>
                 
 
@@ -458,19 +458,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <p>NAT：网络地址转换<br>1、ipv4地址严重不够用了<br>     A B C类可以使用 D组播 E科研<br>2、IP地址分为公网IP和私网IP<br>     公网IP只能在公网上使用<br>     私网IP只能在内网中使用</p>
+<pre><code>公网上不允许出现私有IP地址
+私网IP可以重复在内网使用</code></pre><p>3、私有地址范围<br>1）10.0.0.0/8     （10开头的）<br>2）172.16.0.0/16 - 172.31.0.0/16     （172.16开头的一直到172.31开头的）<br>3）192.168.0.0/16  （192.168开头的）</p>
+<p>4、NAT主要实现公私有IP地址的转换，一般是路由器或者防火墙上来完成，不建议在三层交换机上配置</p>
+<p>5、NAT有3大类：<br>     1）静态NAT：1对1映射，（静态PAT，端口映射技术）<br>     2）动态NAT<br>     3）PAT（端口地址转换，port address translations）<br>          PAT也称为端口复用技术</p>
+<p>端口号范围：0-65535</p>
+<p>内到外：转换源IP<br>外到内：转换目标IP</p>
+<p>6、NAT命令：<br>     1）定义内外网端口：<br>          int f0/0<br>          IP nat inside<br>          exit<br>     2）定义外外网端口：<br>          int f0/1<br>          IP nat putside<br>          exit<br>     3）配置PAT：<br> 定义内部地址池：<br>acc 1 permit 192.168.0.0 0.0.255.255<br>做PAT动态映射：<br>conf t<br>ip nat inside(内网来的) source(源ip地址）list 1 int f0/1(公网转换) overload(启用端口复用技术）</p>
+<p>ACL表运用在接口上才是流量过滤，其他情况只是匹配作用</p>
+<pre><code>4）配置静态端口转换</code></pre><p>conf t<br>ip nat inside source static tcp 192.168.1.3 80 100.1.1.2 80</p>
+<hr>
+<p>动态路由<br>router rip<br>ver 2<br>no auto-symmary   #不进行路由汇总<br>network 10.0.0.0    #路由的两个接口<br>network 20.0.0.0</p>
 
             </div>
             <hr/>
@@ -496,7 +495,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/05/22/hello-world/">http://yoursite.com/2020/05/22/hello-world/</a>
+                    <a href="http://yoursite.com/2020/07/16/NAT/">http://yoursite.com/2020/07/16/NAT/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -699,67 +698,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2020/05/22/ACL/">
+                <a href="/2020/07/16/NAT/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ACL(Access Control List)">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NAT(Network Address Translations">
                         
-                        <span class="card-title">ACL(Access Control List)</span>
+                        <span class="card-title">NAT(Network Address Translations</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1、ACL是一种包过滤技术
-2、ACL基于IP包头的IP地址、四层TCP/UDP头部的端口号、【5层数据】           基于三层和四四层过滤3、ACL在路由器上配置，也可以在防火墙上配置（一般称为策略）
-5、ACL主要分为2大类：1
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/22/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            NAT：网络地址转换1、ipv4地址严重不够用了     A B C类可以使用 D组播 E科研2、IP地址分为公网IP和私网IP     公网IP只能在公网上使用     私网IP只能在内网中使用
+公网上不允许出现私有IP地址
+私网IP可以
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
                             </span>
                         <span class="publish-author">
                             
@@ -770,6 +733,45 @@
                     </div>
                 </div>
 
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/07/12/ICMP%E4%B8%8EHSRP/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ICMP与HSRP">
+                        
+                        <span class="card-title">ICMP与HSRP</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            网络层协议：IP ARP ICMP只有应用层协议有端口，其他无端口
+#ICMP协议是干什么的？网络探测与回馈机制1、网络探测2、路由跟踪3、错误反馈
+#ICMP协议的封装格式：icmp头+数据icmp头：ICMP类型、代码icmp类型字段：
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
                 
             </div>
         </div>

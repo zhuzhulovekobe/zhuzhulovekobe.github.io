@@ -466,7 +466,7 @@
 <p>CEF表(快速转发)  邻接关系表<br>vlan20 20.1.1.1 - BB CC</p>
 <p>3)一次路由，永久交换</p>
 <p>4、三层交换机上起虚拟接口（为其配置vlan的网关）<br>int vlan 10   #给vlan10起网关，<br>ip add 10.1.1.254 255.255.255.0<br>no shut<br>exit</p>
-<p>6、三层路由的思路<br>一、交换部分<br>1）Trunk                 #switchport mode trunk<br>2）VTP                   #vtp domain kobe<br>3）创建vlan            #vlan 10<br>4）分配端口到vlan    #switchport access vlan 10<br>5）起三层虚拟接口     #ip routing    int vlan 10 ip add 10.1.1.254 255.255.255.0<br>二、路由部分<br>1）配置ip，开启<br>int f0/1<br>ip add<br>no switchport<br>2）配置路由</p>
+<p>6、三层路由的思路<br>一、交换部分<br>1）Trunk                 #switchport trunk encapsulated dot1q  – switchport mode trunk<br>2）VTP                   #vtp domain kobe<br>3）创建vlan            #vlan 10<br>4）分配端口到vlan    #switchport access vlan 10<br>5）起三层虚拟接口     #ip routing    int vlan 10 ip add 10.1.1.254 255.255.255.0<br>二、路由部分<br>1）配置ip，开启<br>int f0/1<br>ip add<br>no switchport<br>2）配置路由</p>
 <hr>
 <p>HSRP协议（cisco专有）/VRRP协议（通用）<br>#HSRP<br>热备份路由协议<br>1、HSRP组号：1-225  没有大小之分<br>2、虚拟路由器的ip称为虚拟ip地址<br>3、HSRP组的成员：<br>1）虚拟路由器（老大）<br>2）活跃路由器<br>3）备份路由器<br>4）其他路由器</p>
 <p>4、HSRP优先级:1-255 越大默认优先级越高，一般默认为100<br>5、HSRP组成员通过定时发送hello包来交流，默认每隔3秒一个hello包，坚持10秒<br>6、占先权preempt<br>作用：当检测不到对方，或者检测到对方优先级比自己低时，立即抢占活跃路由的名分</p>
@@ -702,32 +702,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/07/12/ICMP%E4%B8%8EHSRP/">
+                <a href="/2020/07/16/NAT/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ICMP与HSRP">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NAT(Network Address Translations">
                         
-                        <span class="card-title">ICMP与HSRP</span>
+                        <span class="card-title">NAT(Network Address Translations</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            网络层协议：IP ARP ICMP只有应用层协议有端口，其他无端口
-#ICMP协议是干什么的？网络探测与回馈机制1、网络探测2、路由跟踪3、错误反馈
-#ICMP协议的封装格式：icmp头+数据icmp头：ICMP类型、代码icmp类型字段：
+                            NAT：网络地址转换1、ipv4地址严重不够用了     A B C类可以使用 D组播 E科研2、IP地址分为公网IP和私网IP     公网IP只能在公网上使用     私网IP只能在内网中使用
+公网上不允许出现私有IP地址
+私网IP可以
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -736,7 +735,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
