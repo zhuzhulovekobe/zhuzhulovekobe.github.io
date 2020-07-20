@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="NAT(Network Address Translations, Hexo">
+    <meta name="keywords" content="VPN, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>NAT(Network Address Translations | Hexo</title>
+    <title>VPN | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">NAT(Network Address Translations</h1>
+                    <h1 class="description center-align post-title">VPN</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-16
+                    2020-07-18
                 </div>
                 
 
@@ -458,18 +458,19 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>NAT：网络地址转换<br>1、ipv4地址严重不够用了<br>     A B C类可以使用 D组播 E科研<br>2、IP地址分为公网IP和私网IP<br>     公网IP只能在公网上使用<br>     私网IP只能在内网中使用</p>
-<pre><code>公网上不允许出现私有IP地址
-私网IP可以重复在内网使用</code></pre><p>3、私有地址范围<br>1）10.0.0.0/8     （10开头的）<br>2）172.16.0.0/16 - 172.31.0.0/16     （172.16开头的一直到172.31开头的）<br>3）192.168.0.0/16  （192.168开头的）</p>
-<p>4、NAT主要实现公私有IP地址的转换，一般是路由器或者防火墙上来完成，不建议在三层交换机上配置</p>
-<p>5、NAT有3大类：<br>     1）静态NAT：1对1映射，（静态PAT，端口映射技术）<br>     2）动态NAT<br>     3）PAT（端口地址转换，port address translations）<br>          PAT也称为端口复用技术</p>
-<p>端口号范围：0-65535</p>
-<p>内到外：转换源IP<br>外到内：转换目标IP</p>
-<p>6、NAT命令：<br>     1）定义内外网端口：<br>          int f0/0<br>          IP nat inside<br>          exit<br>     2）定义外外网端口：<br>          int f0/1<br>          IP nat putside<br>          exit<br>     3）配置PAT：<br> 定义内部地址池：<br>acc 1 permit 192.168.0.0 0.0.255.255<br>做PAT动态映射：<br>conf t<br>ip nat inside(内网来的) source(源ip地址）list 1 int f0/1(公网转换) overload(启用端口复用技术）</p>
-<p>ACL表运用在接口上才是流量过滤，其他情况只是匹配作用</p>
-<pre><code>4）配置静态端口转换</code></pre><p>conf t<br>ip nat inside source static tcp 192.168.1.3 80 100.1.1.2 80</p>
+                <p>VPN<br>1、VPN(Virtual Private Network)<br>     虚拟专有网络<br>     虚拟专网<br>2、引入<br>     VPN可以实现在不安全的网络上，安全的传输数据，好像专网<br>     VPN只是一个技术，使用PKI技术，来保证数据的安全三要素</p>
+<p>3、安全三要素：<br>1）机密性<br>2）完整性<br>3）身份验证</p>
+<p>4、加密技术：<br>1）对称加密： 加密和解密使用的密钥相同<br>                       密钥是通信双方协商生成的，生成过程是明文通信<br>                       密钥容易泄露！<br>                       对称解密算法：DES、3DES、AES<br>2）非对称加密算法：使用公私钥加密数据<br>                                公私钥成对生成，互为加解密关系<br>                                公私钥不能互相推算<br>                                双方交换公钥，使用对方的公钥加密实现机密性<br>                                使用自己的私钥进行签名，实现身份验证<br>                                常见算法：RSA、DH<br>5、完整性算法/hssh值算法：<br>MD5<br>SHA</p>
+<p>6、VPN的类型：<br>1）远程访问VPN：（Remote Access VPN）<br>     一般用在个人到安全连接企业内部<br>     一般出差员工/在家办公，安全连接内网时使用<br>     一般公司部署VPN服务器，员工在外拨号连接VPN<br>     常见RA-VPN协议：PPTP VPN、L2TP VPN、SSTP VPN、EZvpn/easyvpn、SSL VPN</p>
+<p>2）点到点VPN：<br>     一般用在企业对企业安全连接<br>     一般需要在两个企业总出口设备之间建立VPN通道<br>     常见的点到点VPN：IPsecVPN</p>
+<p>7、IPsecVPN：<br>1）属于点到点VPN，可以在2家企业之间建立VPN隧道<br>2）VPN隧道优点：安全性<br>                             合并两家企业内网（例如172.0.0.0跨越公网到达192.0.0）<br>3）VPN隧道技术：<br>      传输模式：只加密上层数据，不加密私有IP包头<br>      隧道模式：加密整个私有IP包，包括IP包头，更加安全，速度慢</p>
+<p>4）VPN隧道技术：重新封装技术+加密认证技术</p>
+<p>5）IPsecVPN分为2大阶段：<br>第一阶段：管理连接<br>目的：通信双方设备通过非对称加密算法加密对称加密算法所使用的对称密钥<br>命令：<br>conf t<br>crypto isakmp policy 1  （传输集）<br>encryption des/3des/aes          aes<br>hash md5/sha                           sha<br>group 1/2/5                              2/5<br>authentication pre-share<br>lifetime 秒<br>exit<br>crypto isakmp key 预共享密钥address 对方的公网IP地址</p>
+<p>第二阶段：数据连接<br>目的：通过对称加密算法加密实际所要传输的私网数据<br>定义VPN触发流量：<br>access-list 100 permit ip 192.168.0.0 0.0.255.255 172.16.0.0 0.0.255.255</p>
+<p>crypto ipsec transform-set 传输模式名 esp/sh-des/3des/aes esp/sh-md5/sha-hmac</p>
+<p>ESP：支持加密及认证（身份验证+完整性）<br>AH：只支持认证</p>
 <hr>
-<p>动态路由<br>router rip<br>ver 2<br>no auto-symmary   #不进行路由汇总<br>network 10.0.0.0    #路由的两个接口<br>network 20.0.0.0</p>
+<p>远程访问VPN：<br>在公司需要搭建VPN服务器<br>VPN服务器需要对VPN客户端进行身份验证<br>VPN服务器需要给VPN客户端下发权限及IP地址</p>
 
             </div>
             <hr/>
@@ -495,7 +496,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/16/NAT/">http://yoursite.com/2020/07/16/NAT/</a>
+                    <a href="http://yoursite.com/2020/07/18/VPN/">http://yoursite.com/2020/07/18/VPN/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -702,19 +703,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/07/18/VPN/">
+                <a href="/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="VPN">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="防火墙">
                         
-                        <span class="card-title">VPN</span>
+                        <span class="card-title">防火墙</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            VPN1、VPN(Virtual Private Network)     虚拟专有网络     虚拟专网2、引入     VPN可以实现在不安全的网络上，安全的传输数据，好像专网     VPN只是一个技术，使用PKI技术，来保证数据的安
+                            WAF（Web Application Firewall 网站应用防火墙）：主要检查网页交互主流防火墙：状态检测防火墙       工作流程：       1）数据包进入防火墙&gt;检测该数据包是否包含在状态检测表中&gt;是就通过状态检
                         
                     </div>
                     <div class="publish-info">
@@ -739,26 +740,26 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/12/ICMP%E4%B8%8EHSRP/">
+                <a href="/2020/07/16/NAT/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ICMP与HSRP">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="NAT(Network Address Translations">
                         
-                        <span class="card-title">ICMP与HSRP</span>
+                        <span class="card-title">NAT(Network Address Translations</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            网络层协议：IP ARP ICMP只有应用层协议有端口，其他无端口
-#ICMP协议是干什么的？网络探测与回馈机制1、网络探测2、路由跟踪3、错误反馈
-#ICMP协议的封装格式：icmp头+数据icmp头：ICMP类型、代码icmp类型字段：
+                            NAT：网络地址转换1、ipv4地址严重不够用了     A B C类可以使用 D组播 E科研2、IP地址分为公网IP和私网IP     公网IP只能在公网上使用     私网IP只能在内网中使用
+公网上不允许出现私有IP地址
+私网IP可以
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
                             </span>
                         <span class="publish-author">
                             
