@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="防火墙, Hexo">
+    <meta name="keywords" content="linux操作系统基础, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>防火墙 | Hexo</title>
+    <title>linux操作系统基础 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">防火墙</h1>
+                    <h1 class="description center-align post-title">linux操作系统基础</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-18
+                    2020-07-23
                 </div>
                 
 
@@ -458,18 +458,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>WAF（Web Application Firewall 网站应用防火墙）：主要检查网页交互<br>主流防火墙：状态检测防火墙<br>       工作流程：<br>       1）数据包进入防火墙&gt;检测该数据包是否包含在状态检测表中&gt;是就通过状态检测表，然后被防火墙转发<br>                                                                                                  &gt; 否就检测是否符合安全过滤策略，符合再通过路由-PAT-ARP等操作防火墙进行转发，并且记录会话状态<br>                                                                                                                                                        &gt;不符合直接丢弃<br>1、区域隔离<br>     1）内部区域：inside/trust<br>     2）外部区域：outside/untrust<br>     3）隔离区：DMZ</p>
-<p>2、IDS（入侵检测系统）：<br>     1）检测是否入侵，是就记录入侵动作并且放行<br>     2）旁路安装，相当于复制一份流量到IDS防火墙并且生成报告</p>
-<p>3、IPS（入侵防御系统）：<br>     1）检测是否入侵，是就down掉入侵数流量<br>     2）直路安装，是流量的必经之路，对五层数据继续检查</p>
-<p>4、衡量防火墙性能五大指标：<br>     1）吞吐量<br>     2）时延<br>     3）丢包率<br>     4）并发连接数<br>     5）新建连接数 </p>
-<p>5、防火墙的工作模式<br>     1）透明模式：<br>          1）防火墙工作在二层模式即端口是交换机端口，不影响原有的网络结构</p>
-<pre><code>2）路由模式：
-     1）防火墙工作在三层模式即端口是路由器端口，影响了原有的网络结构
-
-3）混杂模式
-     1）透明加路由模式</code></pre><p>6、区域隔离<br>     1）PC配置IP及网关<br>     2）防火墙：创建区域–&gt;接口加入到区域<br>     3）接口配置IP、配置路由<br>     4）写策略</p>
-<p>7、做源转换（SNAT）<br>     1）在区域隔离的基础上将外网PC的网关去掉<br>     2）此时，外网PC无法给inside和dmz回包，相当于模拟了互联网<br>     3）配置源转换（PAT）实现inside和dmz区域可以上网<br>     4）防火墙–&gt;地址转换</p>
-<p>8、目标转换（DNAT）<br>     1）把DMZ区域设置为web服务器，并且发布出去<br>     2）做DNAT<br>     3）写策略 outside-dmz:172.16.1.1:80<br>     4)使用外网outside区域访问http：//100.1.1.88</p>
+                <p>了解当前系统的信息<br>1、硬盘大小：<br>     fdisk -l<br>     /dev/sda 操作系统中第一块硬盘的名称及所在路径<br>     linux操作系统中一切皆文件（文件名） sd（硬盘类型）a （第一块）<br>     1024 1000</p>
+<p>2、内存大小：<br>     cat /proc/meminfo<br>     查看MemTotal大小就是内存大小</p>
+<p>3、cpu型号：<br>     cat /proc/cpuinfo<br>     查看model name</p>
+<p>4、关机与重启<br>     poweroff<br>     reboot</p>
+<hr>
+<p>linux操作系统树状结构<br>目录     == 文件夹<br>/          ==  操作系统的起始路径-也叫根路径<br>cd        == change directory  改变目录<br>..          == 返回上一级目录<br>pwd     ==  显示当前目录<br>ls          == list，列出当前目录的内容<br>/bin      == 普通用户和管理员可以执行的命令<br>/sbin    == 只有管理员才能执行的命令 关机或者重启<br>/boot   == 引导 主导目录 独立的分区 启动菜单 内核<br>/dev     ==  devuce设备 设备文件存放目录<br>/etc       ==  配置文件存放目录<br>/home   == 普通用户的家<br>/root      == 管理员的家<br>/media   ==  光驱的挂载目录<br>/mnt       == 临时设备挂载目录<br>/proc      ==  里面的数据都在内存中，进程的所在目录<br>/tmp       ==  临时文件存放目录<br>/var         ==  常变文件存放目录 日志文件 邮件目录</p>
+<hr>
+<p>快捷键运用<br>安装VMwaretools实现虚拟机和真实机之间的文件复制</p>
+<p>ctrl+l   ==  清除屏幕内容</p>
+<p>linux如何分辨文件类型，安装文件颜色可以<br>蓝色    ==    目录<br>黑色    == 普通文件<br>浅蓝色   ==  符号链接（快捷方式）<br>黑底黄字   ==  设备文件 硬盘 sda<br>绿色    == 带有执行权限的文件<br>红色    == 压缩包<br>紫色   ==  图片 模块文件</p>
+<hr>
+<p>增 删 改 查<br>查询：1、查看目录下有哪些内容 命令：ls<br>          2、查看文件中的内容     命令：cat</p>
+<p>创建：1、创建文件 命令：touch  文件名<br>          2、创建目录  命令：mkdir 目录名</p>
+<p>改：1、剪切  命令：mv kobe.txt kobe  （剪切kobe.txt到kobe目录下）<br>            改名字 命令：mv kobe.txt kobe1.txt   (把kobe改为kobe1）<br>       2、复制  命令：cp kobe.txt /tmp    （把kobe文件复制到tmp目录下）</p>
+<p>删除：rm remove 移除<br>          rm -f 文件名    ==  强制删除<br>          rm -fr 目录名   ==  删除目录</p>
+<hr>
+<p>命令字的帮助信息查询<br>fdisk -l<br>ls -l   ==  显示详细的信息<br>ls -a  == all 显示当前目录下所有文件信息<br>ls -a /boot   ==  显示boot目录下的所有文件内容<br>ls -lh   == 显示文件大小</p>
+<p>man   ==  menu菜单的缩写<br>man ls  ==  查看ls所有的命令字</p>
+<hr>
+<p>压缩与解压缩<br>gzip 文件名称    ==  压缩文件<br>gunzip 压缩包   == 解压缩</p>
+<p>bzip2 文件名称  ==  压缩<br>bunzip2 压缩包   ==解压缩</p>
+<p>对目录进行打包压缩<br>tar -cf /tmp/allfile.tar /tmp/allfile  ==  在tmp下创建一个压缩文件,文件名为allfile.tar，打包的目为allfile<br>c = create    f = file </p>
+<p>tar -xf /tmp/allfile.tar -C /root    ==   x是解包  C是指定路径</p>
+<hr>
+<p>vim编辑器的末行模式：<br>1、:q！ ==  不保存退出<br>2、:set nu   ==  显示行号<br>3、:% s/l/x/g     ==  %为每一行，s为替换，g为不管多少个l都替换为x<br>4、:50,60 d    ==  删除50-60行的数据</p>
+<p>在文本里面的具体内容里输入：2yy，意思是复制1、2行的文字，然后在空白处输入：p，即可粘贴<br>当前行输入dd，删除当前行<br>gg ==  回到第一行<br>G ==  回到最后一行<br>50G  ==  跳转到第五十行</p>
 
             </div>
             <hr/>
@@ -495,7 +509,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/">http://yoursite.com/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/</a>
+                    <a href="http://yoursite.com/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">http://yoursite.com/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -698,9 +712,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="linux操作系统基础">
+                        
+                        <span class="card-title">linux操作系统基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            了解当前系统的信息1、硬盘大小：     fdisk -l     /dev/sda 操作系统中第一块硬盘的名称及所在路径     linux操作系统中一切皆文件（文件名） sd（硬盘类型）a （第一块）     1024 1000
+2、内
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/07/20/kali%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/">
                     <div class="card-image">
@@ -719,45 +773,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/07/18/VPN/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="VPN">
-                        
-                        <span class="card-title">VPN</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            VPN1、VPN(Virtual Private Network)     虚拟专有网络     虚拟专网2、引入     VPN可以实现在不安全的网络上，安全的传输数据，好像专网     VPN只是一个技术，使用PKI技术，来保证数据的安
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
                             </span>
                         <span class="publish-author">
                             

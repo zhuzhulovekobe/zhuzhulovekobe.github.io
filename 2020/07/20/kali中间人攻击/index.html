@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="防火墙, Hexo">
+    <meta name="keywords" content="kali基本信息, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>防火墙 | Hexo</title>
+    <title>kali基本信息 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">防火墙</h1>
+                    <h1 class="description center-align post-title">kali基本信息</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-18
+                    2020-07-20
                 </div>
                 
 
@@ -458,18 +458,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>WAF（Web Application Firewall 网站应用防火墙）：主要检查网页交互<br>主流防火墙：状态检测防火墙<br>       工作流程：<br>       1）数据包进入防火墙&gt;检测该数据包是否包含在状态检测表中&gt;是就通过状态检测表，然后被防火墙转发<br>                                                                                                  &gt; 否就检测是否符合安全过滤策略，符合再通过路由-PAT-ARP等操作防火墙进行转发，并且记录会话状态<br>                                                                                                                                                        &gt;不符合直接丢弃<br>1、区域隔离<br>     1）内部区域：inside/trust<br>     2）外部区域：outside/untrust<br>     3）隔离区：DMZ</p>
-<p>2、IDS（入侵检测系统）：<br>     1）检测是否入侵，是就记录入侵动作并且放行<br>     2）旁路安装，相当于复制一份流量到IDS防火墙并且生成报告</p>
-<p>3、IPS（入侵防御系统）：<br>     1）检测是否入侵，是就down掉入侵数流量<br>     2）直路安装，是流量的必经之路，对五层数据继续检查</p>
-<p>4、衡量防火墙性能五大指标：<br>     1）吞吐量<br>     2）时延<br>     3）丢包率<br>     4）并发连接数<br>     5）新建连接数 </p>
-<p>5、防火墙的工作模式<br>     1）透明模式：<br>          1）防火墙工作在二层模式即端口是交换机端口，不影响原有的网络结构</p>
-<pre><code>2）路由模式：
-     1）防火墙工作在三层模式即端口是路由器端口，影响了原有的网络结构
-
-3）混杂模式
-     1）透明加路由模式</code></pre><p>6、区域隔离<br>     1）PC配置IP及网关<br>     2）防火墙：创建区域–&gt;接口加入到区域<br>     3）接口配置IP、配置路由<br>     4）写策略</p>
-<p>7、做源转换（SNAT）<br>     1）在区域隔离的基础上将外网PC的网关去掉<br>     2）此时，外网PC无法给inside和dmz回包，相当于模拟了互联网<br>     3）配置源转换（PAT）实现inside和dmz区域可以上网<br>     4）防火墙–&gt;地址转换</p>
-<p>8、目标转换（DNAT）<br>     1）把DMZ区域设置为web服务器，并且发布出去<br>     2）做DNAT<br>     3）写策略 outside-dmz:172.16.1.1:80<br>     4)使用外网outside区域访问http：//100.1.1.88</p>
+                <p>#VMware的一些原理<br>1、VMware的VMnet实际上是一台虚拟交换机<br>     真实机的VMnet1是与VMware连接的桥梁，把真实机的VMnet1配与VMware的vmnet1同网段可通信</p>
+<p>2、虚拟机桥接到VMnet0相当于真实环境中多了一台电脑，可以正常上网，这是联网的最简单方式</p>
+<p>3、要想vmnet0联网一定成功，先查看自己真实机的网卡，记住有线和无线产商的名字，然后打开虚拟机，<br>     打开网络编辑器，修改vmnet0的桥接模式，将其桥接到无线或者有线对应的厂商下面</p>
+<hr>
+<p>#中间人攻击原理<br>1、利用ARP协议的漏洞<br>2、ARP协议原理<br>     1）发送ARP广播请求<br>     2）发送ARP单播应答</p>
+<hr>
+<p>nmap<br>-sP ip地址                             #scan Ping就是ping扫描<br>-p 端口号，端口号 IP地址      #p是port端口的意思，查看开放端口<br>-sT                                        #尝试完成3次TCP握手<br>-sU                                        #UDP<br>-sV 端口号，端口号 IP地址      #服务器版本探测<br>-O  IP地址                              #查看操作系统<br>-A  IP地址                              #全面扫描<br>-oA                                        #o是output</p>
+<p>hydra  美杜莎</p>
+<p>命令：hydra -l root -P /root/dic/test_pwd.dic 10.10.20.79 ssh -vV<br>解释：<br>     1）-l=login   root=以root身份去连接   -P=指定密码  /root/dic/test_pwd.dic=密码字典路径<br>     2）10.10.20.78 ssh=对此主机的ssh服务进行攻击 -vV=显示暴力破解过程<br>     3）-l（l 小写是因为用户名已经知道，如果用户名不知道也要用到字典爆破时，要用L，如-P原理一样）</p>
 
             </div>
             <hr/>
@@ -495,7 +492,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/">http://yoursite.com/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/</a>
+                    <a href="http://yoursite.com/2020/07/20/kali%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/">http://yoursite.com/2020/07/20/kali%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -702,25 +699,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/07/20/kali%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/">
+                <a href="/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="kali基本信息">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="linux操作系统基础">
                         
-                        <span class="card-title">kali基本信息</span>
+                        <span class="card-title">linux操作系统基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #VMware的一些原理1、VMware的VMnet实际上是一台虚拟交换机     真实机的VMnet1是与VMware连接的桥梁，把真实机的VMnet1配与VMware的vmnet1同网段可通信
-2、虚拟机桥接到VMnet0相当于真实环境
+                            了解当前系统的信息1、硬盘大小：     fdisk -l     /dev/sda 操作系统中第一块硬盘的名称及所在路径     linux操作系统中一切皆文件（文件名） sd（硬盘类型）a （第一块）     1024 1000
+2、内
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-23
                         </span>
                         <span class="publish-author">
                             
@@ -740,19 +737,19 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/18/VPN/">
+                <a href="/2020/07/18/%E9%98%B2%E7%81%AB%E5%A2%99/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="VPN">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="防火墙">
                         
-                        <span class="card-title">VPN</span>
+                        <span class="card-title">防火墙</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            VPN1、VPN(Virtual Private Network)     虚拟专有网络     虚拟专网2、引入     VPN可以实现在不安全的网络上，安全的传输数据，好像专网     VPN只是一个技术，使用PKI技术，来保证数据的安
+                            WAF（Web Application Firewall 网站应用防火墙）：主要检查网页交互主流防火墙：状态检测防火墙       工作流程：       1）数据包进入防火墙&gt;检测该数据包是否包含在状态检测表中&gt;是就通过状态检
                         
                     </div>
                     <div class="publish-info">
