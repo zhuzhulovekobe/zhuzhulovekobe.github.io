@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="linux操作系统基础, Hexo">
+    <meta name="keywords" content="linux基本网络信息, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>linux操作系统基础 | Hexo</title>
+    <title>linux基本网络信息 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">linux操作系统基础</h1>
+                    <h1 class="description center-align post-title">linux基本网络信息</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-23
+                    2020-07-25
                 </div>
                 
 
@@ -458,32 +458,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>了解当前系统的信息<br>1、硬盘大小：<br>     fdisk -l<br>     /dev/sda 操作系统中第一块硬盘的名称及所在路径<br>     linux操作系统中一切皆文件（文件名） sd（硬盘类型）a （第一块）<br>     1024 1000</p>
-<p>2、内存大小：<br>     cat /proc/meminfo<br>     查看MemTotal大小就是内存大小</p>
-<p>3、cpu型号：<br>     cat /proc/cpuinfo<br>     查看model name</p>
-<p>4、关机与重启<br>     poweroff<br>     reboot</p>
+                <p>1、确认系统的网卡信息和ip地址<br>ethernet 0   ==  表示第一个网卡<br>ethernet 1   ==  表示第二个网卡</p>
+<p>2、关闭networkmanager服务<br>service NetworkManager stop<br>chkconfig –level 345  NetworkManager off</p>
+<p>3、配置网络地址<br>ip addr add 192.168.1.1/24 dev eth0<br>ip link set eth0 up   ==   开启eth0网卡<br>ip route add defaul via 192.168.1.254 dev eth0   ==  配置默认路由，默认网关为254</p>
+<p>4、通过配置文件配置网络地址<br>eth0<br>vim /etc/sysconfig/network-scripts/ifcfg-eth0<br>DEVICE=eth0    网卡设备<br>TYPE=Ethernet  类型<br>ONBOOT=yes 是否允许network服务管理该文件<br>BOOTPROTO=static 静态获取<br>IPADDR=192.168.1.254<br>NETMASK=255.255.255.0</p>
 <hr>
-<p>linux操作系统树状结构<br>目录     == 文件夹<br>/          ==  操作系统的起始路径-也叫根路径<br>cd        == change directory  改变目录<br>..          == 返回上一级目录<br>pwd     ==  显示当前目录<br>ls          == list，列出当前目录的内容<br>/bin      == 普通用户和管理员可以执行的命令<br>/sbin    == 只有管理员才能执行的命令 关机或者重启<br>/boot   == 引导 主导目录 独立的分区 启动菜单 内核<br>/dev     ==  devuce设备 设备文件存放目录<br>/etc       ==  配置文件存放目录<br>/home   == 普通用户的家<br>/root      == 管理员的家<br>/media   ==  光驱的挂载目录<br>/mnt       == 临时设备挂载目录<br>/proc      ==  里面的数据都在内存中，进程的所在目录<br>/tmp       ==  临时文件存放目录<br>/var         ==  常变文件存放目录 日志文件 邮件目录</p>
-<hr>
-<p>快捷键运用<br>安装VMwaretools实现虚拟机和真实机之间的文件复制</p>
-<p>ctrl+l   ==  清除屏幕内容</p>
-<p>linux如何分辨文件类型，安装文件颜色可以<br>蓝色    ==    目录<br>黑色    == 普通文件<br>浅蓝色   ==  符号链接（快捷方式）<br>黑底黄字   ==  设备文件 硬盘 sda<br>绿色    == 带有执行权限的文件<br>红色    == 压缩包<br>紫色   ==  图片 模块文件</p>
-<hr>
-<p>增 删 改 查<br>查询：1、查看目录下有哪些内容 命令：ls<br>          2、查看文件中的内容     命令：cat</p>
-<p>创建：1、创建文件 命令：touch  文件名<br>          2、创建目录  命令：mkdir 目录名</p>
-<p>改：1、剪切  命令：mv kobe.txt kobe  （剪切kobe.txt到kobe目录下）<br>            改名字 命令：mv kobe.txt kobe1.txt   (把kobe改为kobe1）<br>       2、复制  命令：cp kobe.txt /tmp    （把kobe文件复制到tmp目录下）</p>
-<p>删除：rm remove 移除<br>          rm -f 文件名    ==  强制删除<br>          rm -fr 目录名   ==  删除目录</p>
-<hr>
-<p>命令字的帮助信息查询<br>fdisk -l<br>ls -l   ==  显示详细的信息<br>ls -a  == all 显示当前目录下所有文件信息<br>ls -a /boot   ==  显示boot目录下的所有文件内容<br>ls -lh   == 显示文件大小</p>
-<p>man   ==  menu菜单的缩写<br>man ls  ==  查看ls所有的命令字</p>
-<hr>
-<p>压缩与解压缩<br>gzip 文件名称    ==  压缩文件<br>gunzip 压缩包   == 解压缩</p>
-<p>bzip2 文件名称  ==  压缩<br>bunzip2 压缩包   ==解压缩</p>
-<p>对目录进行打包压缩<br>tar -cf /tmp/allfile.tar /tmp/allfile  ==  在tmp下创建一个压缩文件,文件名为allfile.tar，打包的目为allfile<br>c = create    f = file </p>
-<p>tar -xf /tmp/allfile.tar -C /root    ==   x是解包  C是指定路径</p>
-<hr>
-<p>vim编辑器的末行模式：<br>1、:q！ ==  不保存退出<br>2、:set nu   ==  显示行号<br>3、:% s/l/x/g     ==  %为每一行，s为替换，g为不管多少个l都替换为x<br>4、:50,60 d    ==  删除50-60行的数据</p>
-<p>在文本里面的具体内容里输入：2yy，意思是复制1、2行的文字，然后在空白处输入：p，即可粘贴<br>当前行输入dd，删除当前行<br>gg ==  回到第一行<br>G ==  回到最后一行<br>50G  ==  跳转到第五十行</p>
+<p>日志文件（系统日志、登录日志、程序日志）<br>1、系统日志：/var/messages<br>2、登录日志：/var/secure</p>
+<p>日志的管理服务<br>vim /etc/rsyslog.conf   == 日志服务配置文件<br>$黑体字有效行</p>
+<p>日志的异地备份 日志服务器建立</p>
 
             </div>
             <hr/>
@@ -509,7 +491,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">http://yoursite.com/2020/07/23/linux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/</a>
+                    <a href="http://yoursite.com/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/">http://yoursite.com/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -712,30 +694,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2020/07/24/linux%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8/">
+                <a href="/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="linux软件安装及用户分类">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="linux基本网络信息">
                         
-                        <span class="card-title">linux软件安装及用户分类</span>
+                        <span class="card-title">linux基本网络信息</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            mv C* bak  ==  剪切C开头的所有文件移动到bak里面
-封装后的软件包安装便捷特点后缀：rpm、deb     1、rpm：red hat package managerl（红帽软件包）     2、deb：Debian    
+                            1、确认系统的网卡信息和ip地址ethernet 0   ==  表示第一个网卡ethernet 1   ==  表示第二个网卡
+2、关闭networkmanager服务service NetworkManager stopchkconfi
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -744,6 +727,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -754,25 +738,24 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/20/kali%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/">
+                <a href="/2020/07/24/linux%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="kali基本信息">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="linux调整文件及目录权限">
                         
-                        <span class="card-title">kali基本信息</span>
+                        <span class="card-title">linux调整文件及目录权限</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #VMware的一些原理1、VMware的VMnet实际上是一台虚拟交换机     真实机的VMnet1是与VMware连接的桥梁，把真实机的VMnet1配与VMware的vmnet1同网段可通信
-2、虚拟机桥接到VMnet0相当于真实环境
+                            useradd tom  ==  新建一个组，名为tomid tom    ==  查看tom的uid值su tom    ==  切换到tom用户模式下echo “xxx” &gt; /tmp/test.txt   ==  把xxx写入t
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-24
                             </span>
                         <span class="publish-author">
                             
