@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="linux基本网络信息, Hexo">
+    <meta name="keywords" content="python变量与赋值, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>linux基本网络信息 | Hexo</title>
+    <title>python变量与赋值 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">linux基本网络信息</h1>
+                    <h1 class="description center-align post-title">python变量与赋值</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-07-25
+                    2020-07-28
                 </div>
                 
 
@@ -458,15 +458,21 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>1、确认系统的网卡信息和ip地址<br>ethernet 0   ==  表示第一个网卡<br>ethernet 1   ==  表示第二个网卡</p>
-<p>2、关闭networkmanager服务<br>service NetworkManager stop<br>chkconfig –level 345  NetworkManager off</p>
-<p>3、配置网络地址<br>ip addr add 192.168.1.1/24 dev eth0<br>ip link set eth0 up   ==   开启eth0网卡<br>ip route add defaul via 192.168.1.254 dev eth0   ==  配置默认路由，默认网关为254</p>
-<p>4、通过配置文件配置网络地址<br>eth0<br>vim /etc/sysconfig/network-scripts/ifcfg-eth0<br>DEVICE=eth0    网卡设备<br>TYPE=Ethernet  类型<br>ONBOOT=yes 是否允许network服务管理该文件<br>BOOTPROTO=static 静态获取<br>IPADDR=192.168.1.254<br>NETMASK=255.255.255.0</p>
-<hr>
-<p>日志文件（系统日志、登录日志、程序日志）<br>1、系统日志：/var/messages<br>2、登录日志：/var/secure</p>
-<p>日志的管理服务<br>vim /etc/rsyslog.conf   == 日志服务配置文件<br>$黑体字有效行</p>
-<p>日志的异地备份 日志服务器建立</p>
-
+                <p>python变量与赋值</p>
+<p>1、变量 = 赋值（赋值类型）<br>     name = input(“输入名字”)</p>
+<p>2、变量名称的定义：<br>     1）不能以数字开头<br>     2）变量名称中不能包含特殊符号（_下划线除外）<br>     3）变量名称区分大小写<br>     4）关键字不能作为变量名称使用<br>     5）内建函数不能作为变量名使用</p>
+<p>3、变量   赋值   数字   字符串<br>     1）字符串变量中包含的索引值<br>    astr = “python”<br>    printf(astr [0:2])        ==  变量[脚标的起始位置：脚标的结束位置]，显示位置结束之前的内容才会显示<br>    printf(astr [0:1000])   ==  变量[脚标的起始位置：脚标的结束位置]，大于python的索引值，全部输出<br>    printf(astr [0:1000:2])   == 变量[脚标的起始位置：脚标的结束位置：步长值]，只取yho<br>    printf(astr [-1])   ==  取最后一位<br>    printf(astr [-1:-4:-1])  == 从最后一位索引值开始取值，按照-1的步长取<br>    printf(astr [：])     ==  全取<br>    printf(astr [：：-1])    == 到过来全取</p>
+<pre><code>2）变量赋值字符串(str) 数字(int) 列表(list) 元组(tuple) 字典(dict)
+列表：特点 [] 在中括号里可以写入不同类型的数据，每一个值直接用逗号分隔，支持脚标取值
+元组：（）取值方式与列表基本相同
+字典：{} 字典没有索引值，按照键值对来取值
+    userdict = {&quot;tom&quot;:&quot;123&quot;,&quot;lisa&quot;:&quot;456&quot;}
+    username = input(&quot;name:&quot;)
+    userpassword = input(&quot;password:&quot;)
+    if username in userdict and userpassword = userdict[username]:（赋useranme在userdict的键位值）  
+           print(&quot;欢迎登陆&quot;)
+    else:
+            print(&quot;gd&quot;)</code></pre>
             </div>
             <hr/>
 
@@ -491,7 +497,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/">http://yoursite.com/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/</a>
+                    <a href="http://yoursite.com/2020/07/28/python%E5%8F%98%E9%87%8F%E4%B8%8E%E8%B5%8B%E5%80%BC/">http://yoursite.com/2020/07/28/python%E5%8F%98%E9%87%8F%E4%B8%8E%E8%B5%8B%E5%80%BC/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -698,21 +704,20 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/07/28/python%E5%8F%98%E9%87%8F%E4%B8%8E%E8%B5%8B%E5%80%BC/">
+                <a href="/2020/07/28/python%E5%BE%AA%E7%8E%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="python变量与赋值">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="python循环">
                         
-                        <span class="card-title">python变量与赋值</span>
+                        <span class="card-title">python循环</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python变量与赋值
-1、变量 = 赋值（赋值类型）     name = input(“输入名字”)
-2、变量名称的定义：     1）不能以数字开头     2）变量名称中不能包含特殊符号（_下划线除外）     3）变量名称区分大小
+                            import randomsum = randow.randint(1,100) == 调用random模块，并且随机取1-100其中一个数
+1、while 条件：while num &gt; 10：    子语句  num += 1  =
                         
                     </div>
                     <div class="publish-info">
@@ -737,24 +742,25 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/24/linux%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90/">
+                <a href="/2020/07/25/linux%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="linux调整文件及目录权限">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="linux基本网络信息">
                         
-                        <span class="card-title">linux调整文件及目录权限</span>
+                        <span class="card-title">linux基本网络信息</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            useradd tom  ==  新建一个组，名为tomid tom    ==  查看tom的uid值su tom    ==  切换到tom用户模式下echo “xxx” &gt; /tmp/test.txt   ==  把xxx写入t
+                            1、确认系统的网卡信息和ip地址ethernet 0   ==  表示第一个网卡ethernet 1   ==  表示第二个网卡
+2、关闭networkmanager服务service NetworkManager stopchkconfi
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-25
                             </span>
                         <span class="publish-author">
                             
